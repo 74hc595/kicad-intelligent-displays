@@ -1,4 +1,4 @@
-(module HDSP-21xx_DIP28 (layer F.Cu) (tedit 5E103BE8)
+(module HDSP-21xx_DIP28 (layer F.Cu) (tedit 5E11317E)
   (descr "0.2\" Eight Character Alphanumeric Display (dual 14-hole rows)")
   (tags "THT DIP DIL PDIP 2.54mm 15.24mm 600mil Socket")
   (fp_text reference REF** (at 16.51 -7.62) (layer F.SilkS)
@@ -47,9 +47,4 @@
   (pad 27 thru_hole oval (at 2.54 -15.24 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
   (pad 14 thru_hole oval (at 33.02 0 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
   (pad 28 thru_hole oval (at 0 -15.24 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
-  (model ${KISYS3DMOD}/Package_DIP.3dshapes/DIP-28_W15.24mm_Socket.wrl
-    (at (xyz 0 0 0))
-    (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
-  )
 )

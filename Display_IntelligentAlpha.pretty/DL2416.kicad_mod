@@ -1,4 +1,4 @@
-(module DL2416 (layer F.Cu) (tedit 5E0FCC7C)
+(module DL2416 (layer F.Cu) (tedit 5E113172)
   (descr ".160\" Red, 4-Character 16 Segment Plus Decimal Alphanumeric Intelligent Display With Memory/Decoder/Driver")
   (tags "THT DIP DIL PDIP 2.54mm 15.24mm 600mil")
   (fp_text reference REF** (at 10.16 -7.62 180) (layer F.SilkS)
@@ -37,9 +37,4 @@
   (pad 16 thru_hole oval (at 5.08 -15.24 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
   (pad 17 thru_hole oval (at 2.54 -15.24 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
   (pad 18 thru_hole oval (at 0 -15.24 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
-  (model ${KISYS3DMOD}/Package_DIP.3dshapes/DIP-24_W15.24mm.wrl
-    (at (xyz 0 0 0))
-    (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
-  )
 )

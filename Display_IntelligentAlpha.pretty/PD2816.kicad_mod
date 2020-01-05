@@ -1,4 +1,4 @@
-(module PD2816 (layer F.Cu) (tedit 5E104C40)
+(module PD2816 (layer F.Cu) (tedit 5E1131B0)
   (descr ".112\" Red, 8-Digit, 18-Segment Including Decimal Alphanumeric Programmable Display With Built In CMOS Control Functions")
   (tags "THT DIP DIL PDIP 2.54mm 15.24mm 600mil")
   (fp_text reference REF** (at 13.97 -7.62 180) (layer F.SilkS)
@@ -43,9 +43,4 @@
   (pad 23 thru_hole oval (at 2.54 -15.24 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
   (pad 12 thru_hole oval (at 27.94 0 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
   (pad 24 thru_hole oval (at 0 -15.24 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
-  (model ${KISYS3DMOD}/Package_DIP.3dshapes/DIP-24_W15.24mm.wrl
-    (at (xyz 0 0 0))
-    (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
-  )
 )

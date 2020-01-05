@@ -1,4 +1,4 @@
-(module PDSP188x_DIP30 (layer F.Cu) (tedit 5E10477F)
+(module PDSP188x_DIP30 (layer F.Cu) (tedit 5E1131A4)
   (descr ".180\" 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display (dual 15-hole rows)")
   (tags "DIL DIP PDIP 2.54mm 7.62mm 300mil")
   (fp_text reference REF** (at 19.05 -3.81 180) (layer F.SilkS)
@@ -49,9 +49,4 @@
   (pad 30 thru_hole oval (at 0 -7.62 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
   (pad 15 thru_hole oval (at 35.56 0 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
   (pad 16 thru_hole oval (at 35.56 -7.62 90) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask))
-  (model ${KISYS3DMOD}/Package_DIP.3dshapes/DIP-32_W7.62mm.wrl
-    (at (xyz 0 0 0))
-    (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
-  )
 )
