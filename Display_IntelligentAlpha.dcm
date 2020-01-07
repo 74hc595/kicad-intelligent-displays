@@ -7,18 +7,22 @@ $ENDCMP
 #
 $CMP DL1414T
 D .112" Red, 4-Digit 17-Segment Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://www.decadecounter.com/vta/pdf/DL1414.pdf
 $ENDCMP
 #
 $CMP DL1416
 D .160" Red, 4-Digit 16-Segment Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://www.bitsavers.org/components/siemens/1990_Siemens_Optoelectronics_Data_Book.pdf
 $ENDCMP
 #
 $CMP DL1416B
 D .160" Red, 4-Digit 16-Segment Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://www.bitsavers.org/components/siemens/1990_Siemens_Optoelectronics_Data_Book.pdf
 $ENDCMP
 #
 $CMP DL1814
 D .112" Red, 8-Digit 17-Segment Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://www.bitsavers.org/components/siemens/1990_Siemens_Optoelectronics_Data_Book.pdf
 $ENDCMP
 #
 $CMP DL2416
@@ -33,226 +37,282 @@ $ENDCMP
 #
 $CMP DL2416T
 D .160" Red, 4-Digit 16-Segment Plus Decimal Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://www.decadecounter.com/vta/pdf/DL2416.pdf
 $ENDCMP
 #
 $CMP DL3416
 D .225" Red, 4-Digit 16-Segment Plus Decimal Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://www.bitsavers.org/components/siemens/1990_Siemens_Optoelectronics_Data_Book.pdf
 $ENDCMP
 #
 $CMP DL3422
 D .170"/.100" (nom.) Upper And Lower Case 4-Digit 22-Segment Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://bitsavers.trailing-edge.com/components/litronix/_dataBooks/1982_Litronix_Optoelectronics_Catalog.pdf
 $ENDCMP
 #
 $CMP DLG1414
 D .145" Green, 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLO1414.pdf
 $ENDCMP
 #
 $CMP DLG2416
 D .200" Green, 4-Digit 5x7 Dot Matrix Alphanumeric Intelligent Display with Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLG2416.pdf
 $ENDCMP
 #
 $CMP DLG3416
 D .270" Green, 4-Digit Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLO3416.pdf
 $ENDCMP
 #
 $CMP DLO1414
 D .145" High Efficiency Red, 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLO1414.pdf
 $ENDCMP
 #
 $CMP DLO2416
 D .200" High Efficiency Red, 4-Digit 5x7 Dot Matrix Alphanumeric Intelligent Display with Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLG2416.pdf
 $ENDCMP
 #
 $CMP DLO3416
 D .270" High Efficiency Red, 4-Digit Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLO3416.pdf
 $ENDCMP
 #
 $CMP DLR1414
 D .145" Red, 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLO1414.pdf
 $ENDCMP
 #
 $CMP DLR2416
 D .200" Red, 4-Character 5x7 Dot Matrix Alphanumeric Intelligent Display with Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLG2416.pdf
 $ENDCMP
 #
 $CMP DLR3416
 D .270" Red, 4-Digit Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLO3416.pdf
 $ENDCMP
 #
 $CMP DLx1414
 D .145" 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLO1414.pdf
 $ENDCMP
 #
 $CMP DLx2416
 D .200" 4-Digit 5x7 Dot Matrix Alphanumeric Intelligent Display with Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLG2416.pdf
 $ENDCMP
 #
 $CMP DLx3416
 D .270" 4-Digit Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/siemens/DLO3416.pdf
 $ENDCMP
 #
 $CMP HDLA-1414
 D .145" Orange, 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3611EN
 $ENDCMP
 #
 $CMP HDLA-2416
 D .200" Orange, 4-Digit 5x7 Dot Matrix Alphanumeric Intelligent Display with Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-0662EN
 $ENDCMP
 #
 $CMP HDLA-3416
 D .270" Orange, 4-Digit Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3642EN
 $ENDCMP
 #
 $CMP HDLG-1414
 D .145" Green, 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3611EN
 $ENDCMP
 #
 $CMP HDLG-2416
 D .200" Green, 4-Digit 5x7 Dot Matrix Alphanumeric Intelligent Display with Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-0662EN
 $ENDCMP
 #
 $CMP HDLG-3416
 D .270" Green, 4-Digit Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3642EN
 $ENDCMP
 #
 $CMP HDLO-1414
 D .145" High Efficiency Red, 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3611EN
 $ENDCMP
 #
 $CMP HDLO-2416
 D .200" High Efficiency Red, 4-Digit 5x7 Dot Matrix Alphanumeric Intelligent Display with Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-0662EN
 $ENDCMP
 #
 $CMP HDLO-3416
 D .270" High Efficiency Red, 4-Digit Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3642EN
 $ENDCMP
 #
 $CMP HDLS-1414
 D .145" Red, 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3611EN
 $ENDCMP
 #
 $CMP HDLS-2416
 D .200" Red, 4-Digit 5x7 Dot Matrix Alphanumeric Intelligent Display with Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-0662EN
 $ENDCMP
 #
 $CMP HDLU-1414
 D .145" Low Power Red, 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3611EN
 $ENDCMP
 #
 $CMP HDLU-2416
 D .200" Low Power Red, 4-Digit 5x7 Dot Matrix Alphanumeric Intelligent Display with Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-0662EN
 $ENDCMP
 #
 $CMP HDLY-1414
 D .145" Yellow, 4-Digit, Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3611EN
 $ENDCMP
 #
 $CMP HDLY-3416
 D .270" Yellow, 4-Digit Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-3642EN
 $ENDCMP
 #
 $CMP HDSP-2107
 D Deep Red Eight-Character 5mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2110
 D Orange Eight-Character 5mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2111
 D Yellow Eight-Character 5mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2112
 D Red Eight-Character 5mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2113
 D .270" Yellow, 4-Digit Dot Matrix Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-21xx
 D Eight-Character 5mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2500
 D Orange Eight-Character 7mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2501
 D Yellow Eight-Character 7mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2502
 D Red Eight-Character 7mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2503
 D Green Eight-Character 7mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2504
 D Deep Red Eight-Character 7mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-250x
 D Eight-Character 7mm Smart Alphanumeric Display
+F https://docs.broadcom.com/docs/AV02-0629EN
 $ENDCMP
 #
 $CMP HDSP-2530
 D .180" Orange, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://docs.broadcom.com/docs/AV02-2018EN
 $ENDCMP
 #
 $CMP HDSP-2531
 D .180" Yellow, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://docs.broadcom.com/docs/AV02-2018EN
 $ENDCMP
 #
 $CMP HDSP-2532
 D .180" High Efficiency Red, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://docs.broadcom.com/docs/AV02-2018EN
 $ENDCMP
 #
 $CMP HDSP-2533
 D .180" Green, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://docs.broadcom.com/docs/AV02-2018EN
 $ENDCMP
 #
 $CMP HDSP-2534
 D .180" Red, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://docs.broadcom.com/docs/AV02-2018EN
 $ENDCMP
 #
 $CMP HPDL-1414
 D .112" Red, 4-Digit 17-Segment Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/hp/HPDL-1414.pdf
 $ENDCMP
 #
 $CMP HPDL-2416
 D .160" Red, 4-Digit 16-Segment Plus Decimal Alphanumeric Intelligent Display With Memory/Decoder/Driver
+F http://pdf.datasheetcatalog.com/datasheet/hp/HPDL-1414.pdf
 $ENDCMP
 #
 $CMP PD2816
 D .112" Red, 8-Digit, 18-Segment Including Decimal Alphanumeric Programmable Display With Built In CMOS Control Functions
+F http://www.bitsavers.org/components/siemens/1985_Siemens_Optoelectronics_Catalog.pdf
 $ENDCMP
 #
 $CMP PDSP1880
 D .180" Red, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf
 $ENDCMP
 #
 $CMP PDSP1881
 D .180" Yellow, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf
 $ENDCMP
 #
 $CMP PDSP1882
 D .180" High Efficiency Red, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf
 $ENDCMP
 #
 $CMP PDSP1883
 D .180" Green, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf
 $ENDCMP
 #
 $CMP PDSP1884
 D .180" High Efficiency Green, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf
 $ENDCMP
 #
 $CMP PDSP188x
 D .180" 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+F https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf
 $ENDCMP
 #
 #End Doc Library
