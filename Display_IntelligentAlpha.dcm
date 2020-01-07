@@ -199,6 +199,26 @@ $CMP HDSP-250x
 D Eight-Character 7mm Smart Alphanumeric Display
 $ENDCMP
 #
+$CMP HDSP-2530
+D .180" Orange, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+$ENDCMP
+#
+$CMP HDSP-2531
+D .180" Yellow, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+$ENDCMP
+#
+$CMP HDSP-2532
+D .180" High Efficiency Red, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+$ENDCMP
+#
+$CMP HDSP-2533
+D .180" Green, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+$ENDCMP
+#
+$CMP HDSP-2534
+D .180" Red, 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
+$ENDCMP
+#
 $CMP HPDL-1414
 D .112" Red, 4-Digit 17-Segment Alphanumeric Intelligent Display With Memory/Decoder/Driver
 $ENDCMP
