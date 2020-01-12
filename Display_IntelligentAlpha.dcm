@@ -315,4 +315,8 @@ D .180" 8-Character 5x7 Dot Matrix Alphanumeric Programmable Display
 F https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf
 $ENDCMP
 #
+$CMP SP1-16
+D .160" Red, 4-Digit 16-Segment Alphanumeric Intelligent Display With Memory/Decoder/Driver
+$ENDCMP
+#
 #End Doc Library
