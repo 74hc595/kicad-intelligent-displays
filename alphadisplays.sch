@@ -5,10 +5,10 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
-Rev ""
-Comp ""
+Title "Intelligent Alphanumeric Display Tester"
+Date "2020-01-22"
+Rev "1.1"
+Comp "Matt Sarnoff (msarnoff.org)"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -1482,6 +1482,10 @@ Connection ~ 1650 925
 Text Notes 1675 875  0    50   ~ 0
 Diode prevents UPDI leakage\nfrom powering the displays 
 NoConn ~ 2250 2125
+Text Notes 825  1625 2    50   ~ 0
+~CU
+Text Notes 5225 5175 0    79   ~ 0
+Use round machine-pin 0.1" SIP sockets for D1-D8.\nMany displays have short pins that don't make good contact\nin standard rectangular 0.1" header sockets.
 Wire Bus Line
 	8825 2700 11025 2700
 Wire Bus Line
@@ -1492,6 +1496,4 @@ Wire Bus Line
 	3225 2625 11025 2625
 Wire Bus Line
 	3250 4700 11025 4700
-Text Notes 825  1625 2    50   ~ 0
-~CU
 $EndSCHEMATC
