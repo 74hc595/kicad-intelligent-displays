@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name Display_IntelligentAlpha)(type KiCad)(uri ${KIPRJMOD}/Display_IntelligentAlpha.pretty)(options "")(descr "HP/Litronix/Siemens/Osram/Avago/Broadcom intelligent alphanumeric displays"))
+)
