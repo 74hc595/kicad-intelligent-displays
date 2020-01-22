@@ -310,7 +310,7 @@ Text Label 6275 775  3    50   ~ 0
 Text Label 6375 775  3    50   ~ 0
 ~BL
 Text Label 6475 775  3    50   ~ 0
-~CU
+A3
 Text Label 6575 775  3    50   ~ 0
 CUE
 Entry Wire Line
@@ -334,7 +334,7 @@ Text Label 7750 775  3    50   ~ 0
 Text Label 7850 775  3    50   ~ 0
 ~BL
 Text Label 7950 775  3    50   ~ 0
-~CU
+A3
 Text Label 8050 775  3    50   ~ 0
 CUE
 $Comp
@@ -439,7 +439,7 @@ Entry Wire Line
 Wire Wire Line
 	5025 775  5025 975 
 Text Label 5025 775  3    50   ~ 0
-~CU
+A3
 $Comp
 L Display_IntelligentAlpha:DL1814 D5
 U 1 1 5E1E370C
@@ -961,9 +961,6 @@ Wire Wire Line
 	8275 4600 8275 4100
 NoConn ~ 9675 3000
 NoConn ~ 9575 3000
-NoConn ~ 9475 3000
-NoConn ~ 6950 3050
-NoConn ~ 4400 3050
 Wire Bus Line
 	11025 2625 11025 2700
 Entry Wire Line
@@ -1066,17 +1063,16 @@ $EndComp
 $Comp
 L power:VCC #PWR0120
 U 1 1 5E1A2680
-P 1650 925
-F 0 "#PWR0120" H 1650 775 50  0001 C CNN
-F 1 "VCC" H 1650 1075 50  0000 C CNN
-F 2 "" H 1650 925 50  0001 C CNN
-F 3 "" H 1650 925 50  0001 C CNN
-	1    1650 925 
+P 1350 800
+F 0 "#PWR0120" H 1350 650 50  0001 C CNN
+F 1 "VCC" H 1350 950 50  0000 C CNN
+F 2 "" H 1350 800 50  0001 C CNN
+F 3 "" H 1350 800 50  0001 C CNN
+	1    1350 800 
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
 	1750 925  1650 925 
-Connection ~ 1650 925 
 $Comp
 L power:GND #PWR0121
 U 1 1 5E1AC3C0
@@ -1159,8 +1155,6 @@ Text Label 850  2225 0    50   ~ 0
 Wire Wire Line
 	2250 2025 2450 2025
 Wire Wire Line
-	2250 2125 2450 2125
-Wire Wire Line
 	2250 2225 2450 2225
 Wire Wire Line
 	2250 2325 2450 2325
@@ -1168,8 +1162,6 @@ Text Label 2450 2025 2    50   ~ 0
 ~RD
 Text Label 2450 2325 2    50   ~ 0
 ~BL
-Text Label 2450 2125 2    50   ~ 0
-~CU
 Text Label 2450 2225 2    50   ~ 0
 CUE
 $Comp
@@ -1187,8 +1179,6 @@ NoConn ~ 2250 3325
 NoConn ~ 2250 3425
 NoConn ~ 2250 3225
 NoConn ~ 2250 3125
-NoConn ~ 2250 3025
-NoConn ~ 2250 2925
 NoConn ~ 2250 2525
 NoConn ~ 2250 2425
 NoConn ~ 1050 2125
@@ -1428,10 +1418,10 @@ F 3 "~" H 825 5475 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:VCC #PWR?
+L power:VCC #PWR0130
 U 1 1 5E173744
 P 825 5325
-F 0 "#PWR?" H 825 5175 50  0001 C CNN
+F 0 "#PWR0130" H 825 5175 50  0001 C CNN
 F 1 "VCC" H 825 5475 50  0000 C CNN
 F 2 "" H 825 5325 50  0001 C CNN
 F 3 "" H 825 5325 50  0001 C CNN
@@ -1439,16 +1429,59 @@ F 3 "" H 825 5325 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0131
 U 1 1 5E17374E
 P 825 5625
-F 0 "#PWR?" H 825 5375 50  0001 C CNN
+F 0 "#PWR0131" H 825 5375 50  0001 C CNN
 F 1 "GND" H 825 5475 50  0000 C CNN
 F 2 "" H 825 5625 50  0001 C CNN
 F 3 "" H 825 5625 50  0001 C CNN
 	1    825  5625
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	4400 3050 4400 2950
+Wire Wire Line
+	4400 2950 4875 2950
+Text Label 4875 2950 2    50   ~ 0
+HDSPCLK
+Wire Wire Line
+	6950 3050 6950 2950
+Wire Wire Line
+	6950 2950 7425 2950
+Text Label 7425 2950 2    50   ~ 0
+HDSPCLK
+Wire Wire Line
+	9475 3000 9475 2900
+Wire Wire Line
+	9475 2900 9950 2900
+Text Label 9950 2900 2    50   ~ 0
+PD2816CLK
+Wire Wire Line
+	2250 2925 2700 2925
+Text Label 2700 2925 2    50   ~ 0
+HDSPCLK
+Wire Wire Line
+	2250 3025 2700 3025
+Text Label 2700 3025 2    50   ~ 0
+PD2816CLK
+$Comp
+L Device:D D10
+U 1 1 5E1F032B
+P 1500 800
+F 0 "D10" H 1500 584 50  0000 C CNN
+F 1 "D" H 1500 675 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-323" H 1500 800 50  0001 C CNN
+F 3 "~" H 1500 800 50  0001 C CNN
+	1    1500 800 
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1650 800  1650 925 
+Connection ~ 1650 925 
+Text Notes 1675 875  0    50   ~ 0
+Diode prevents UPDI leakage\nfrom powering the displays 
+NoConn ~ 2250 2125
 Wire Bus Line
 	8825 2700 11025 2700
 Wire Bus Line
@@ -1459,4 +1492,6 @@ Wire Bus Line
 	3225 2625 11025 2625
 Wire Bus Line
 	3250 4700 11025 4700
+Text Notes 825  1625 2    50   ~ 0
+~CU
 $EndSCHEMATC
