@@ -86,10 +86,12 @@
 struct quirks {
   uint8_t left_to_right_digit_numbering:1;
   uint8_t has_cursor:1;
+  uint8_t cursor_parallel_load:1;
+  uint8_t has_blanking:1;
+  uint8_t has_read:1;
   uint8_t controlreg_pd2816:1;
   uint8_t controlreg_hdsp2xxx:1;
-  uint8_t controlreg_dlx:1;
-  uint8_t :3;
+  uint8_t :1;
 };
 
 /* Display properties */
@@ -138,42 +140,41 @@ static const struct display_spec DISPLAYS[NUM_DISPLAY_TYPES] PROGMEM =
     .num_digits=4, .asciival_min='\0', .asciival_max='\x7f',
   },
   [DL1416] = {
-    .quirks={ .has_cursor=1 },
+    .quirks={ .has_cursor=1, .cursor_parallel_load=1 },
     .num_digits=4, .asciival_min=' ', .asciival_max='_',
   },
   [DL1814] = {
-    .quirks={ .has_cursor=1 },
+    .quirks={ .has_blanking=1 },
     .num_digits=8, .asciival_min=' ', .asciival_max='_',
   },
   [DL2416] = {
-    .quirks={ .has_cursor=1 },
+    .quirks={ .has_cursor=1, .has_blanking=1 },
     .num_digits=4, .asciival_min=' ', .asciival_max='_',
   },
   [DLX2416] = {
-    .quirks={ .has_cursor=1, .controlreg_dlx=1 },
+    .quirks={ .has_cursor=1, .has_blanking=1 },
     .num_digits=4, .asciival_min='\0', .asciival_max='\x7f',
   },
   [DL3416] = {
-    .quirks={ .has_cursor=1 },
+    .quirks={ .has_cursor=1, .has_blanking=1 },
     .num_digits=4, .asciival_min=' ', .asciival_max='_',
   },
   [DLX3416] = {
-    .quirks={ .has_cursor=1, .controlreg_dlx=1 },
+    .quirks={ .has_cursor=1, .has_blanking=1 },
     .num_digits=4, .asciival_min='\0', .asciival_max='\x7f',
   },
   [DL3422] = {
-    .quirks={ .has_cursor=1 },
+    .quirks={ .has_cursor=1, .has_blanking=1 },
     .num_digits=4, .asciival_min=' ', .asciival_max='\x7e',
   },
   [PD2816] = {
-    .quirks={ .controlreg_pd2816=1 },
+    .quirks={ .controlreg_pd2816=1, .has_read=1 },
     .num_digits=8, .asciival_min=' ', .asciival_max='_',
   },
   [HDSP2xxx] = {
-    .quirks={ .left_to_right_digit_numbering=1, .controlreg_hdsp2xxx=1 },
+    .quirks={ .left_to_right_digit_numbering=1, .has_read=1, .controlreg_hdsp2xxx=1 },
     .num_digits=8, .asciival_min='\0', .asciival_max='\x7f',
   },
-
 };
 
 
@@ -275,6 +276,20 @@ static void displayChar(uint8_t pos, uint8_t c) {
 }
 
 
+static void setCursorMask(uint8_t bitmask) {
+  if (disp.quirks.cursor_parallel_load) {
+    /* DL1416 sets cursor for all digits with one write */
+    writeByte(_BV(ADDR_FL)|_BV(ADDR_A4), bitmask);
+  } else {
+    /* Others require one write per digit */
+    for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
+      writeByte(pos|_BV(ADDR_FL)|_BV(ADDR_A4), (bitmask & 1));
+      bitmask >>= 1;
+    }
+  }
+}
+
+
 static void displayString_P(PGM_P str) {
   for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
     displayChar(pos, pgm_read_byte(str+pos));
@@ -323,6 +338,99 @@ static void scrollCharSet(uint16_t delay) {
 }
 
 
+static inline char hexdigit(uint8_t i) {
+  i &= 0xF;
+  return '0' + i + ((i <= 9) ? 0 : 7);
+}
+
+
+static void showCharSet(uint16_t delay) {
+  for (uint8_t c = disp.asciival_min; c <= disp.asciival_max; c++) {
+    char hex1 = hexdigit(c >> 4);
+    char hex2 = hexdigit(c & 0xF);
+    displayChar(0, hex1);
+    displayChar(1, hex2);
+    displayChar(2, ' ');
+    for (uint8_t pos = 3; pos < disp.num_digits; pos++) {
+      displayChar(pos, c);
+    }
+    waitMillis(delay);
+  }
+}
+
+
+static void testCursor(uint16_t delay) {
+  if (!disp.quirks.has_cursor) { return; }
+  /* clear cursor from all positions */
+  setCursorMask(0);
+  /* cursor on */
+  pin_high(CUE);
+  displayString_P(msg_abcdefgh);
+  waitMillis(INTER_CHAR_DELAY_MS);
+  /* show cursor individually in all digits */
+  uint8_t mask = 1;
+  for (uint8_t i = 0; i < disp.num_digits; i++) {
+    setCursorMask(mask);
+    waitMillis(delay);
+    mask <<= 1;
+  }
+  /* show cursor in all digits */
+  setCursorMask(0xFF);
+  waitMillis(delay);
+  /* cursor off */
+  setCursorMask(0);
+  pin_high(CUE);
+}
+
+
+static void testBlanking(uint16_t delay) {
+  if (!disp.quirks.has_blanking) { return; }
+  displayString_P(msg_abcdefgh);
+  waitMillis(delay);
+  /* flash three times */
+  pin_low(nBL);  waitMillis(delay);
+  pin_high(nBL); waitMillis(delay);
+  pin_low(nBL);  waitMillis(delay);
+  pin_high(nBL); waitMillis(delay);
+  pin_low(nBL);  waitMillis(delay);
+  /* unblank */
+  pin_high(nBL);
+}
+
+
+static void testReadback(void) {
+  if (!disp.quirks.has_read) { return; }
+}
+
+
+static void testControlRegisterPD2816(void) {
+}
+
+
+static void testControlRegisterHDSP2xxx(void) {
+}
+
+
+static void testControlRegisterDLX(void) {
+}
+
+
+static void testControlRegister(void) {
+  if (disp.quirks.controlreg_pd2816) {
+    testControlRegisterPD2816();
+  } else if (disp.quirks.controlreg_hdsp2xxx) {
+    testControlRegisterHDSP2xxx();
+  }
+}
+
+
+static void menu(void) {
+  setDisplayType(DLX2416);
+  softResetDisplay();
+  displayString_P(msg_dl2416);
+  waitForButton2Press();
+}
+
 
 int main(void)
 {
@@ -367,25 +475,7 @@ int main(void)
     _delay_us(1);
   }
   softResetDisplay();
-  setDisplayType(DL2416);
-  displayString_P(msg_dl2416);
-  waitForButton2Press();
-
-
-  /* is is an HDSP-2xxx? */
-  /* otherwise, is it a PD2816? */
-  /* otherwise, show the menu */
-    /* user must choose from: 1414, 1416, 2416, 3416, 3422, 1814 */
-    /* if 1414, 2416, or 3416, user must choose segmented vs. dot-matrix */
-
-  // displayInit();
-  // PD2816Init();
-  // _delay_ms(1000);
-  // fillDisplayGradual('.');
-  // fillDisplayGradual('*');
-  // fillDisplayGradual('O');
-  // fillDisplayGradual('#');
-  // scrollCharSet();
+  menu();
 
 run:
   displayString_P(msg_abcdefgh);
@@ -397,6 +487,11 @@ run:
   /* test other segments */
   fillDisplayGradual('O', INTER_CHAR_DELAY_MS);
   fillDisplayGradual('.', INTER_CHAR_DELAY_MS);
+  testCursor(INTER_CHAR_DELAY_MS);
+  testBlanking(INTER_CHAR_DELAY_MS);
+  testReadback();
+  testControlRegister();
+  showCharSet(INTER_CHAR_DELAY_MS);
   /* scroll character set */
   scrollCharSet(INTER_CHAR_DELAY_MS);
 
