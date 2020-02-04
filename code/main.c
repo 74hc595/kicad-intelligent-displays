@@ -158,7 +158,61 @@ static const char msg_lamp_test[] PROGMEM                 = "LAMPTEST";
 static const char msg_selftest[] PROGMEM                  = "SELFTEST";
 static const char msg_selftest_pass[] PROGMEM             = "--PASS--";
 static const char msg_selftest_fail[] PROGMEM             = "**FAIL**";
+static const char msg_udc_test[] PROGMEM                  = "UDC TEST";
+static const char msg_udc1[] PROGMEM                      = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0};
+static const char msg_udc2[] PROGMEM                      = {0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0};
 
+static const char udc[] PROGMEM = {
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00010000,
+  0b00011000,
+  0b00011100,
+  0b00011110,
+  0b00011111,
+  0b00001111,
+  0b00000111,
+  0b00000011,
+  0b00000001,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000
+};
+
+static const char udc2[] PROGMEM = {
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000001,
+  0b00000011,
+  0b00000111,
+  0b00001111,
+  0b00011111,
+  0b00011110,
+  0b00011100,
+  0b00011000,
+  0b00010000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000,
+  0b00000000
+};
 
 static const struct display_spec DISPLAYS[NUM_DISPLAY_TYPES] PROGMEM =
 {
@@ -480,8 +534,40 @@ static void testFlash(uint16_t delay) {
 
 
 /* HDSP-2xxx only */
+static void setUserDefinedChar_P(uint8_t idx, PGM_P pattern) {
+  /* set UDC address */
+  writeByte(_BV(ADDR_FL), idx);
+  for (uint8_t row = 0; row < 7; row++) {
+    writeByte(row|_BV(ADDR_FL)|_BV(ADDR_A3), pgm_read_byte(pattern));
+    pattern++;
+  }
+}
+
+
+/* HDSP-2xxx only */
 static void testUserDefinedChars(uint16_t delay) {
   if (!disp.quirks.controlreg_hdsp2xxx) { return; }
+  displayString_P(msg_udc_test);
+  waitMillis(delay<<3);
+  /* clear all user-defined characters */
+  for (uint8_t i = 0; i < 16; i++) {
+    setUserDefinedChar_P(i, udc);
+  }
+  displayString_P(msg_udc1);
+  /* animate each UDC */
+  for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
+    for (uint8_t i = 0; i < sizeof(udc)-6; i++) {
+      setUserDefinedChar_P(pos, udc+i);
+      waitMillis(delay);
+    }
+  }
+  displayString_P(msg_udc2);
+  for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
+    for (uint8_t i = 0; i < sizeof(udc2)-6; i++) {
+      setUserDefinedChar_P(8+pos, udc2+i);
+      waitMillis(delay);
+    }
+  }
 }
 
 
@@ -718,7 +804,7 @@ run:
   testCursor(INTER_CHAR_DELAY_MS);
   testFlash(LONG_DELAY_MS);
   testBlanking(INTER_CHAR_DELAY_MS);
-  testUserDefinedChars(INTER_CHAR_DELAY_MS);
+  testUserDefinedChars(50);
   testControlRegister(INTER_CHAR_DELAY_MS);
   /* show each character and its ASCII code */
   showASCIIValues(INTER_CHAR_DELAY_MS);
