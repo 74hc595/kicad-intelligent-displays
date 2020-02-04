@@ -295,12 +295,15 @@ static void writeByte(uint8_t addr, uint8_t data) {
   port_out(ADDRESS, addr);
   port_out(DATA, data);
   /* being conservative with timing here */
+  delay_ns_max(1000);
   pin_low(nCE);
-  delay_ns_max(100);
+  delay_ns_max(1000);
   pin_low(nWR);
-  delay_ns_max(200);
+  delay_ns_max(1000);
   pin_high(nWR);
+  delay_ns_max(1000);
   pin_high(nCE);
+  delay_ns_max(1000);
 }
 
 
@@ -309,12 +312,16 @@ static uint8_t readByte(uint8_t addr) {
   /* set up address lines and tristate data lines */
   port_out(ADDRESS, addr);
   port_inputs(DATA);
+  delay_ns_max(1000);
   pin_low(nCE);
+  delay_ns_max(1000);
   pin_low(nRD);
-  delay_ns_max(150);
+  delay_ns_max(1000);
   uint8_t data = port_value(DATA);
   pin_high(nRD);
+  delay_ns_max(1000);
   pin_high(nCE);
+  delay_ns_max(1000);
   port_outputs(DATA);
   return data;
 }
@@ -580,6 +587,7 @@ static void testReadback(uint16_t delay) {
   uint8_t writeValue = 1;
   for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
     writeByte(pos|_BV(ADDR_FL)|_BV(ADDR_A4)|_BV(ADDR_A3), writeValue);
+    _delay_ms(10);
     writeValue <<= 1;
   }
   /* read values back */
@@ -589,7 +597,8 @@ static void testReadback(uint16_t delay) {
     if (readValue != expectedReadValue) {
       displayString_P(msg_readfail);
       displayChar(2, '0'+pos);
-      while (1) {} __builtin_unreachable(); /* hang here if read fails */
+      waitMillis(5000); /* long pause, then continue */
+      return;
     }
     expectedReadValue <<= 1;
   }
@@ -604,7 +613,8 @@ static void testReadback(uint16_t delay) {
   if (readValue != expectedReadValue) {
     displayString_P(msg_readfail);
     displayChar(2, 'C');
-    while (1) {} __builtin_unreachable(); /* hang here if read fails */
+    waitMillis(5000); /* long pause, then continue */
+    return;
   }
 
   /* passed */
