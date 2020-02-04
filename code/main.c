@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <avr/io.h>
+#include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <util/delay.h>
 
@@ -74,13 +76,14 @@
 #define CR_HDSP_BRIGHTNESS_20     0b00000101
 #define CR_HDSP_BRIGHTNESS_13     0b00000110
 #define CR_HDSP_BRIGHTNESS_0      0b00000111
-#define CR_HDSP_ATTRS_ON          0b00001000
+#define CR_HDSP_FLASH_ON          0b00001000
 #define CR_HDSP_BLINK_DISPLAY     0b00010000
 #define CR_HDSP_SELF_TEST_RESULT  0b00100000
 #define CR_HDSP_SELF_TEST_START   0b01000000
 
-#define INTER_CHAR_DELAY_MS 250
-
+#define INTER_CHAR_DELAY_MS         250
+#define LONG_DELAY_MS               1000
+#define HDSP_SELF_TEST_DURATION_MS  7000
 
 /* Part-specific quirks */
 struct quirks {
@@ -105,7 +108,8 @@ struct display_spec {
 enum display_type {
   DL1414,   /* segmented */
   DLX1414,  /* dot matrix */
-  DL1416,   /* segmented */
+  DL1416T,  /* (and DL1416, SP1-16) segmented */
+  DL1416B,  /* segmented */
   DL1814,   /* segmented */
   DL2416,   /* segmented */
   DLX2416,  /* dot matrix */
@@ -113,11 +117,12 @@ enum display_type {
   DLX3416,  /* dot matrix */
   DL3422,   /* segmented */
   PD2816,   /* segmented */
-  HDSP2xxx, /* dot matrix */
+  HDSP2xxx, /* (and PD188x) dot matrix */
+  /* Not supported: PD243x/353x/443x and extended features of HDLx-2416/3416 */
   NUM_DISPLAY_TYPES
 };
 
-static const char msg_pd2816[] PROGMEM    = "PD2816  ";
+static const char msg_pd2816[] PROGMEM    = " PD2816 ";
 static const char msg_hdsp2xxx[] PROGMEM  = "HDSP2xxx";
 static const char msg_dl1414[] PROGMEM    = "1414";
 static const char msg_dl1416[] PROGMEM    = "1416";
@@ -128,6 +133,32 @@ static const char msg_dl3422[] PROGMEM    = "3422";
 static const char msg_segmented[] PROGMEM = "SEGM";
 static const char msg_matrix[] PROGMEM    = "MTRX";
 static const char msg_abcdefgh[] PROGMEM  = "ABCDEFGH";
+static const char msg_readtest[] PROGMEM  = "READTEST";
+static const char msg_readfail[] PROGMEM  = "RD  FAIL";
+static const char msg_readok[] PROGMEM    = "READ OK ";
+static const char msg_done[] PROGMEM      = "DONE    ";
+
+/* Control register tests */
+static const char msg_brightness_13[] PROGMEM             = " 13% BRI";
+static const char msg_brightness_20[] PROGMEM             = " 20% BRI";
+static const char msg_brightness_25[] PROGMEM             = " 25% BRI";
+static const char msg_brightness_27[] PROGMEM             = " 27% BRI";
+static const char msg_brightness_40[] PROGMEM             = " 40% BRI";
+static const char msg_brightness_50[] PROGMEM             = " 50% BRI";
+static const char msg_brightness_53[] PROGMEM             = " 53% BRI";
+static const char msg_brightness_80[] PROGMEM             = " 80% BRI";
+static const char msg_brightness_100[] PROGMEM            = "100% BRI";
+static const char msg_underline[] PROGMEM                 = { 0x80|'U', 0x80|'N', 0x80|'D', 0x80|'E', 0x80|'R', 0x80|'L', 0x80|'I', 0x80|'N', 0 };
+static const char msg_charblink_underline[] PROGMEM       = { 0x80|'C', 0x80|'B', 0x80|'L', 0x80|'I', 0x80|'N', 0x80|'K', 0x80|'+', 0x80|'U', 0 };
+static const char msg_underline_blink[] PROGMEM           = { 0x80|'U', 0x80|'L', 0x80|'.', 0x80|'B', 0x80|'L', 0x80|'I', 0x80|'N', 0x80|'K', 0 };
+static const char msg_char_and_underline_blink[] PROGMEM  = { 0x80|'B', 0x80|'L', 0x80|'I', 0x80|'N', 0x80|'K', 0x80|'+', 0x80|'U', 0x80|'L', 0 };
+static const char msg_attributes_off[] PROGMEM            = { 0x80|'(', 0x80|'N', 0x80|'O', 0x80|'R', 0x80|'M', 0x80|'A', 0x80|'L', 0x80|')', 0 };
+static const char msg_blink_all[] PROGMEM                 = "BLINKALL";
+static const char msg_lamp_test[] PROGMEM                 = "LAMPTEST";
+static const char msg_selftest[] PROGMEM                  = "SELFTEST";
+static const char msg_selftest_pass[] PROGMEM             = "--PASS--";
+static const char msg_selftest_fail[] PROGMEM             = "**FAIL**";
+
 
 static const struct display_spec DISPLAYS[NUM_DISPLAY_TYPES] PROGMEM =
 {
@@ -139,8 +170,12 @@ static const struct display_spec DISPLAYS[NUM_DISPLAY_TYPES] PROGMEM =
     .quirks={0},
     .num_digits=4, .asciival_min='\0', .asciival_max='\x7f',
   },
-  [DL1416] = {
+  [DL1416T] = { /* or DL1416, SP1-16, uses a different cursor scheme */
     .quirks={ .has_cursor=1, .cursor_parallel_load=1 },
+    .num_digits=4, .asciival_min=' ', .asciival_max='_',
+  },
+  [DL1416B] = { /* uses the same cursor scheme as DL2416/3416/3422 */
+    .quirks={ .has_cursor=1, },
     .num_digits=4, .asciival_min=' ', .asciival_max='_',
   },
   [DL1814] = {
@@ -192,6 +227,7 @@ static void waitForButton2Press(void) {
 
 
 static void waitMillis(uint16_t ms) {
+  pin_toggle(LED);
   do {
     /* Pause if button 2 is held down */
     while (pin_is_low(nSW2)) {}
@@ -246,24 +282,6 @@ static uint8_t readControlRegister(void) {
 }
 
 
-static inline void hardResetDisplay(void) {
-  /* datasheet specifies 15ms minimum */
-  pin_low(nCLR); _delay_ms(16); pin_high(nCLR);
-  _delay_us(120); /* datasheet specifies to wait 110us min. after rising edge */
-}
-
-
-static void softResetDisplay(void) {
-  if (disp.quirks.controlreg_pd2816) {
-    writeControlRegister(CR_CLEAR);
-    writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_CHAR_SOLID|CR_PD2816_UNDERLINE_SOLID);
-  } else if (disp.quirks.controlreg_hdsp2xxx) {
-    writeControlRegister(CR_CLEAR);
-    writeControlRegister(CR_HDSP_BRIGHTNESS_100);
-  }
-  pin_high(nBL); /* unblank */
-}
-
 static void displayChar(uint8_t pos, uint8_t c) {
   pos &= 0b111;
   if (!disp.quirks.left_to_right_digit_numbering) {
@@ -287,6 +305,37 @@ static void setCursorMask(uint8_t bitmask) {
       bitmask >>= 1;
     }
   }
+}
+
+
+/* HDSP-2xxx only */
+static void setFlashMask(uint8_t bitmask) {
+  for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
+    writeByte(pos|_BV(ADDR_A4)|_BV(ADDR_A3), (bitmask & 1));
+    bitmask >>= 1;
+  }
+}
+
+
+static inline void hardResetDisplay(void) {
+  /* datasheet specifies 15ms minimum */
+  pin_low(nCLR); _delay_ms(16); pin_high(nCLR);
+  _delay_us(120); /* datasheet specifies to wait 110us min. after rising edge */
+}
+
+
+static void softResetDisplay(void) {
+  if (disp.quirks.controlreg_pd2816) {
+    writeControlRegister(CR_CLEAR);
+    writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_ATTRS_ON|CR_PD2816_CHAR_SOLID|CR_PD2816_UNDERLINE_SOLID);
+  } else if (disp.quirks.controlreg_hdsp2xxx) {
+    writeControlRegister(CR_CLEAR);
+    writeControlRegister(CR_HDSP_BRIGHTNESS_100);
+  }
+  if (disp.quirks.has_cursor) {
+    setCursorMask(0);
+  }
+  pin_high(nBL); /* unblank */
 }
 
 
@@ -339,12 +388,11 @@ static void scrollCharSet(uint16_t delay) {
 
 
 static inline char hexdigit(uint8_t i) {
-  i &= 0xF;
-  return '0' + i + ((i <= 9) ? 0 : 7);
+  i &= 0xF; return '0' + i + ((i <= 9) ? 0 : 7);
 }
 
 
-static void showCharSet(uint16_t delay) {
+static void showASCIIValues(uint16_t delay) {
   for (uint8_t c = disp.asciival_min; c <= disp.asciival_max; c++) {
     char hex1 = hexdigit(c >> 4);
     char hex2 = hexdigit(c & 0xF);
@@ -356,30 +404,6 @@ static void showCharSet(uint16_t delay) {
     }
     waitMillis(delay);
   }
-}
-
-
-static void testCursor(uint16_t delay) {
-  if (!disp.quirks.has_cursor) { return; }
-  /* clear cursor from all positions */
-  setCursorMask(0);
-  /* cursor on */
-  pin_high(CUE);
-  displayString_P(msg_abcdefgh);
-  waitMillis(INTER_CHAR_DELAY_MS);
-  /* show cursor individually in all digits */
-  uint8_t mask = 1;
-  for (uint8_t i = 0; i < disp.num_digits; i++) {
-    setCursorMask(mask);
-    waitMillis(delay);
-    mask <<= 1;
-  }
-  /* show cursor in all digits */
-  setCursorMask(0xFF);
-  waitMillis(delay);
-  /* cursor off */
-  setCursorMask(0);
-  pin_high(CUE);
 }
 
 
@@ -398,37 +422,234 @@ static void testBlanking(uint16_t delay) {
 }
 
 
-static void testReadback(void) {
+static void testCursor(uint16_t delay) {
+  if (!disp.quirks.has_cursor) { return; }
+  /* clear cursor from all positions */
+  setCursorMask(0);
+  /* cursor on */
+  pin_high(CUE);
+  displayString_P(msg_abcdefgh);
+  waitMillis(delay);
+  /* show cursor individually in all digits */
+  uint8_t mask = 1;
+  for (uint8_t i = 0; i < disp.num_digits; i++) {
+    setCursorMask(mask);
+    waitMillis(delay);
+    mask <<= 1;
+  }
+  /* show cursor in left and right halves */
+  setCursorMask(0xCC);
+  waitMillis(delay);
+  setCursorMask(0x33);
+  waitMillis(delay);  /* show cursor in all digits */
+  setCursorMask(0xFF);
+  waitMillis(delay);
+  /* cursor off */
+  setCursorMask(0);
+  pin_low(CUE);
+}
+
+
+/* HDSP-2xxx only */
+static void testFlash(uint16_t delay) {
+  if (!disp.quirks.controlreg_hdsp2xxx) { return; }
+  /* clear flash from all positions */
+  setFlashMask(0);
+  /* flash on */
+  writeControlRegister(CR_HDSP_FLASH_ON|CR_HDSP_BRIGHTNESS_100);
+  displayString_P(msg_abcdefgh);
+  /* flash all digits individually */
+  uint8_t mask = 1;
+  for (uint8_t i = 0; i < disp.num_digits; i++) {
+    setFlashMask(mask);
+    waitMillis(delay);
+    mask <<= 1;
+  }
+  /* flash left and right halves */
+  setFlashMask(0x0F);
+  waitMillis(delay);
+  setFlashMask(0xF0);
+  waitMillis(delay);
+  /* flash all digits */
+  setFlashMask(0xFF);
+  waitMillis(delay);
+  /* flash off */
+  setFlashMask(0);
+  writeControlRegister(CR_HDSP_BRIGHTNESS_100);
+}
+
+
+/* HDSP-2xxx only */
+static void testUserDefinedChars(uint16_t delay) {
+  if (!disp.quirks.controlreg_hdsp2xxx) { return; }
+}
+
+
+static void testReadback(uint16_t delay) {
   if (!disp.quirks.has_read) { return; }
+  displayString_P(msg_readtest);
+  waitMillis(delay);
+
+  /* test each bit of data bus */
+  uint8_t writeValue = 1;
+  for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
+    writeByte(pos|_BV(ADDR_FL)|_BV(ADDR_A4)|_BV(ADDR_A3), writeValue);
+    writeValue <<= 1;
+  }
+  /* read values back */
+  uint8_t expectedReadValue = 1;
+  for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
+    uint8_t readValue = readByte(pos|_BV(ADDR_FL)|_BV(ADDR_A4)|_BV(ADDR_A3));
+    if (readValue != expectedReadValue) {
+      displayString_P(msg_readfail);
+      displayChar(2, '0'+pos);
+      while (1) {} __builtin_unreachable(); /* hang here if read fails */
+    }
+    expectedReadValue <<= 1;
+  }
+
+  /* test control register */
+  expectedReadValue = 0b00011011;
+  writeControlRegister(expectedReadValue);
+  uint8_t readValue = readControlRegister();
+  /* restore control register to normal */
+  softResetDisplay();
+
+  if (readValue != expectedReadValue) {
+    displayString_P(msg_readfail);
+    displayChar(2, 'C');
+    while (1) {} __builtin_unreachable(); /* hang here if read fails */
+  }
+
+  /* passed */
+  displayString_P(msg_readok);
+  waitMillis(delay);
 }
 
 
-static void testControlRegisterPD2816(void) {
+static void testControlRegisterPD2816(uint16_t delay) {
+  /* test brightness levels */
+  displayString_P(msg_brightness_25);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_25);
+  waitMillis(delay);
+  displayString_P(msg_brightness_50);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_50);
+  waitMillis(delay);
+  displayString_P(msg_brightness_100);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_100);
+  waitMillis(delay);
+  /* test highlight styles */
+  displayString_P(msg_underline);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_ATTRS_ON|CR_PD2816_CHAR_SOLID|CR_PD2816_UNDERLINE_SOLID);
+  waitMillis(delay<<2);
+  displayString_P(msg_charblink_underline);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_ATTRS_ON|CR_PD2816_CHAR_BLINK|CR_PD2816_UNDERLINE_SOLID);
+  waitMillis(delay<<2);
+  displayString_P(msg_underline_blink);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_ATTRS_ON|CR_PD2816_CHAR_SOLID|CR_PD2816_UNDERLINE_BLINK);
+  waitMillis(delay<<2);
+  displayString_P(msg_char_and_underline_blink);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_ATTRS_ON|CR_PD2816_CHAR_BLINK|CR_PD2816_UNDERLINE_BLINK);
+  waitMillis(delay<<2);
+  displayString_P(msg_attributes_off);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_100);
+  waitMillis(delay<<2);
+  /* test full display blink */
+  displayString_P(msg_blink_all);
+  writeControlRegister(CR_PD2816_BLINK_DISPLAY|CR_PD2816_BRIGHTNESS_100);
+  waitMillis(delay<<2);
+  /* all-segments lamp test */
+  displayString_P(msg_lamp_test);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_50);
+  waitMillis(delay);
+  /* all-segments lamp test */
+  writeControlRegister(CR_PD2816_LAMP_TEST|CR_PD2816_BRIGHTNESS_50);
+  waitMillis(delay);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_50);
+  waitMillis(delay);
+  writeControlRegister(CR_PD2816_LAMP_TEST|CR_PD2816_BRIGHTNESS_50);
+  waitMillis(delay);
+  writeControlRegister(CR_PD2816_BRIGHTNESS_50);
+  waitMillis(delay);
+  /* clear display and restore full brightness */
+  softResetDisplay();
 }
 
 
-static void testControlRegisterHDSP2xxx(void) {
+static void testControlRegisterHDSP2xxx(uint16_t delay) {
+  /* test brightness levels */
+  displayString_P(msg_brightness_13);
+  writeControlRegister(CR_HDSP_BRIGHTNESS_13);
+  waitMillis(delay);
+  displayString_P(msg_brightness_20);
+  writeControlRegister(CR_HDSP_BRIGHTNESS_20);
+  waitMillis(delay);
+  displayString_P(msg_brightness_27);
+  writeControlRegister(CR_HDSP_BRIGHTNESS_27);
+  waitMillis(delay);
+  displayString_P(msg_brightness_40);
+  writeControlRegister(CR_HDSP_BRIGHTNESS_40);
+  waitMillis(delay);
+  displayString_P(msg_brightness_53);
+  writeControlRegister(CR_HDSP_BRIGHTNESS_53);
+  waitMillis(delay);
+  displayString_P(msg_brightness_80);
+  writeControlRegister(CR_HDSP_BRIGHTNESS_80);
+  waitMillis(delay);
+  displayString_P(msg_brightness_100);
+  writeControlRegister(CR_HDSP_BRIGHTNESS_100);
+  waitMillis(delay);
+  /* test full display blink */
+  displayString_P(msg_blink_all);
+  writeControlRegister(CR_HDSP_BLINK_DISPLAY|CR_HDSP_BRIGHTNESS_100);
+  waitMillis(delay<<2);
+  /* invoke the self test */
+  displayString_P(msg_selftest);
+  writeControlRegister(CR_HDSP_BRIGHTNESS_100);
+  waitMillis(delay<<1);
+  writeControlRegister(CR_HDSP_SELF_TEST_START);
+  /* wait for test to finish */
+  waitMillis(HDSP_SELF_TEST_DURATION_MS);
+  /* check result */
+  uint8_t result = readControlRegister();
+  if (result & CR_HDSP_SELF_TEST_RESULT) {
+    displayString_P(msg_selftest_pass);
+    waitMillis(delay<<2);
+  } else {
+    displayString_P(msg_selftest_fail);
+    while (1) {} __builtin_unreachable(); /* hang here if test failed */
+  }
+
+  /* clear display and restore full brightness */
+  softResetDisplay();
 }
 
 
-static void testControlRegisterDLX(void) {
-}
-
-
-static void testControlRegister(void) {
+static void testControlRegister(uint16_t delay) {
   if (disp.quirks.controlreg_pd2816) {
-    testControlRegisterPD2816();
+    testControlRegisterPD2816(delay);
   } else if (disp.quirks.controlreg_hdsp2xxx) {
-    testControlRegisterHDSP2xxx();
+    testControlRegisterHDSP2xxx(delay);
   }
 }
 
 
 static void menu(void) {
-  setDisplayType(DLX2416);
+  setDisplayType(DL1416T);
   softResetDisplay();
-  displayString_P(msg_dl2416);
+  displayString_P(msg_dl1416);
   waitForButton2Press();
+}
+
+
+ISR(port_isr(nSW1)) {
+  /* wait for button release */
+  do { _delay_ms(50); } while (pin_is_low(nSW1));
+  _delay_ms(100);
+  /* software reset */
+  CCP = 0xD8; /* unlock RSTCTRL registers */
+  RSTCTRL.SWRR = RSTCTRL_SWRE_bm;
+  while (1) {} __builtin_unreachable();
 }
 
 
@@ -478,6 +699,11 @@ int main(void)
   menu();
 
 run:
+
+  /* pressing Button 1 reboots the tester */
+  pin_ctrl(nSW1) |= PORT_ISC0_bm|PORT_ISC1_bm;
+  sei();
+
   displayString_P(msg_abcdefgh);
   waitMillis(INTER_CHAR_DELAY_MS);
   /* test even bits */
@@ -487,16 +713,18 @@ run:
   /* test other segments */
   fillDisplayGradual('O', INTER_CHAR_DELAY_MS);
   fillDisplayGradual('.', INTER_CHAR_DELAY_MS);
+  /* test features */
+  testReadback(INTER_CHAR_DELAY_MS);
   testCursor(INTER_CHAR_DELAY_MS);
+  testFlash(LONG_DELAY_MS);
   testBlanking(INTER_CHAR_DELAY_MS);
-  testReadback();
-  testControlRegister();
-  showCharSet(INTER_CHAR_DELAY_MS);
-  /* scroll character set */
+  testUserDefinedChars(INTER_CHAR_DELAY_MS);
+  testControlRegister(INTER_CHAR_DELAY_MS);
+  /* show each character and its ASCII code */
+  showASCIIValues(INTER_CHAR_DELAY_MS);
+  /* scroll character set (loops until SW1 is pressed) */
+  displayString_P(msg_done);
+  waitMillis(LONG_DELAY_MS);
   scrollCharSet(INTER_CHAR_DELAY_MS);
-
-  while (1) {
-    pin_toggle(LED);
-    _delay_ms(100);
-  }
+  __builtin_unreachable();
 }

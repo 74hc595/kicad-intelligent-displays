@@ -17,6 +17,7 @@
 #define PORT_INPUTS_(p)       VPORT(p).DIR = 0x00
 #define PORT_OUT_(p,d)        VPORT(p).OUT = (d)
 #define PORT_VALUE_(p)        VPORT(p).IN
+#define PORT_ISR_(p)          PASTE3_(PORT,p,_PORT_vect)
 #define PIN_INPUT_(p,n)       VPORT(p).DIR &= ~_BV(n)
 #define PIN_OUTPUT_(p,n)      VPORT(p).DIR |= _BV(n)
 #define PIN_LOW_(p,n)         VPORT(p).OUT &= ~_BV(n)
@@ -33,6 +34,7 @@
 #define port_inputs(pn)       PORT_INPUTS_(pn##_PORT)
 #define port_out(pn,d)        PORT_OUT_(pn##_PORT, d)
 #define port_value(pn)        PORT_VALUE_(pn##_PORT)
+#define port_isr(pn)          PORT_ISR_(pn##_PORT)
 #define pin_input(pn)         PIN_INPUT_(pn##_PORT, pn##_PIN)
 #define pin_output(pn)        PIN_OUTPUT_(pn##_PORT, pn##_PIN)
 #define pin_low(pn)           PIN_LOW_(pn##_PORT, pn##_PIN)
