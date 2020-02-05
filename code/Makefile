@@ -41,6 +41,14 @@ CXX      = $(AVR_TOOLCHAIN_DIR)/bin/avr-g++
 OBJCOPY  = $(AVR_TOOLCHAIN_DIR)/bin/avr-objcopy
 SIZE     = $(AVR_TOOLCHAIN_DIR)/bin/avr-size
 
+# Modified linker script is required for atmega809/1609/3209 when using
+# Microchip avr-gcc versions earlier to 3.6.2.1778
+# https://www.avrfreaks.net/forum/solved-compiling-attiny1607-or-other-0-series1-series-avr-gcc
+ifneq ($(DEVICE),atmega4809)
+LDFLAGS += -T avrxmega3_fixed.x
+endif
+
+
 DEPS     = $(OBJ:.o=.d)
 
 .PHONY: all hex program fuse flash clean cpp

@@ -90,7 +90,7 @@ struct quirks {
   uint8_t left_to_right_digit_numbering:1;
   uint8_t has_cursor:1;
   uint8_t cursor_parallel_load:1;
-  uint8_t has_blanking:1;
+  uint8_t has_blanking_pin:1;
   uint8_t has_read:1;
   uint8_t controlreg_pd2816:1;
   uint8_t controlreg_hdsp2xxx:1;
@@ -122,10 +122,12 @@ enum display_type {
   NUM_DISPLAY_TYPES
 };
 
-static const char msg_pd2816[] PROGMEM    = " PD2816 ";
+static const char msg_pd2816[] PROGMEM    = "PD2816  ";
 static const char msg_hdsp2xxx[] PROGMEM  = "HDSP2xxx";
 static const char msg_dl1414[] PROGMEM    = "1414";
 static const char msg_dl1416[] PROGMEM    = "1416";
+static const char msg_dl1416t[] PROGMEM   = "'16T";
+static const char msg_dl1416b[] PROGMEM   = "'16B";
 static const char msg_dl1814[] PROGMEM    = "1814";
 static const char msg_dl2416[] PROGMEM    = "2416";
 static const char msg_dl3416[] PROGMEM    = "3416";
@@ -156,8 +158,8 @@ static const char msg_attributes_off[] PROGMEM            = { 0x80|'(', 0x80|'N'
 static const char msg_blink_all[] PROGMEM                 = "BLINKALL";
 static const char msg_lamp_test[] PROGMEM                 = "LAMPTEST";
 static const char msg_selftest[] PROGMEM                  = "SELFTEST";
-static const char msg_selftest_pass[] PROGMEM             = "--PASS--";
-static const char msg_selftest_fail[] PROGMEM             = "**FAIL**";
+static const char msg_selftest_pass[] PROGMEM             = "S.T.PASS";
+static const char msg_selftest_fail[] PROGMEM             = "S.T.FAIL";
 static const char msg_udc_test[] PROGMEM                  = "UDC TEST";
 static const char msg_udc1[] PROGMEM                      = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0};
 static const char msg_udc2[] PROGMEM                      = {0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0};
@@ -233,27 +235,27 @@ static const struct display_spec DISPLAYS[NUM_DISPLAY_TYPES] PROGMEM =
     .num_digits=4, .asciival_min=' ', .asciival_max='_',
   },
   [DL1814] = {
-    .quirks={ .has_blanking=1 },
+    .quirks={ .has_blanking_pin=1 },
     .num_digits=8, .asciival_min=' ', .asciival_max='_',
   },
   [DL2416] = {
-    .quirks={ .has_cursor=1, .has_blanking=1 },
+    .quirks={ .has_cursor=1, .has_blanking_pin=1 },
     .num_digits=4, .asciival_min=' ', .asciival_max='_',
   },
   [DLX2416] = {
-    .quirks={ .has_cursor=1, .has_blanking=1 },
+    .quirks={ .has_cursor=1, .has_blanking_pin=1 },
     .num_digits=4, .asciival_min='\0', .asciival_max='\x7f',
   },
   [DL3416] = {
-    .quirks={ .has_cursor=1, .has_blanking=1 },
+    .quirks={ .has_cursor=1, .has_blanking_pin=1 },
     .num_digits=4, .asciival_min=' ', .asciival_max='_',
   },
   [DLX3416] = {
-    .quirks={ .has_cursor=1, .has_blanking=1 },
+    .quirks={ .has_cursor=1, .has_blanking_pin=1 },
     .num_digits=4, .asciival_min='\0', .asciival_max='\x7f',
   },
   [DL3422] = {
-    .quirks={ .has_cursor=1, .has_blanking=1 },
+    .quirks={ .has_cursor=1, .has_blanking_pin=1 },
     .num_digits=4, .asciival_min=' ', .asciival_max='\x7e',
   },
   [PD2816] = {
@@ -267,17 +269,50 @@ static const struct display_spec DISPLAYS[NUM_DISPLAY_TYPES] PROGMEM =
 };
 
 
+struct menu_item {
+  PGM_P text;
+  union {
+    const struct menu_item * PROGMEM submenu;
+    struct { uint8_t disptype; uint8_t ff; };
+  };
+};
+
+static const struct menu_item menu_dl1414[] PROGMEM = {
+  { .text=msg_segmented, .disptype=DL1414, .ff=0xFF },
+  { .text=msg_matrix, .disptype=DLX1414, .ff=0xFF },
+  {0}
+};
+
+static const struct menu_item menu_dl1416[] PROGMEM = {
+  { .text=msg_dl1416t, .disptype=DL1416T, .ff=0xFF },
+  { .text=msg_dl1416b, .disptype=DL1416B, .ff=0xFF },
+  {0}
+};
+
+static const struct menu_item menu_dl2416[] PROGMEM = {
+  { .text=msg_segmented, .disptype=DL2416, .ff=0xFF },
+  { .text=msg_matrix, .disptype=DLX2416, .ff=0xFF },
+  {0}
+};
+
+static const struct menu_item menu_dl3416[] PROGMEM = {
+  { .text=msg_segmented, .disptype=DL3416, .ff=0xFF },
+  { .text=msg_matrix, .disptype=DLX3416, .ff=0xFF },
+  {0}
+};
+
+static const struct menu_item main_menu[] PROGMEM = {
+  { .text=msg_dl1414, .submenu=menu_dl1414 },
+  { .text=msg_dl1416, .submenu=menu_dl1416 },
+  { .text=msg_dl1814, .disptype=DL1814, .ff=0xFF },
+  { .text=msg_dl2416, .submenu=menu_dl2416 },
+  { .text=msg_dl3416, .submenu=menu_dl3416 },
+  { .text=msg_dl3422, .disptype=DL3422, .ff=0xFF },
+  {0}
+};
+
+
 static struct display_spec disp = {0};
-
-static void setDisplayType(enum display_type type) {
-  memcpy_P(&disp, DISPLAYS+type, sizeof(disp));
-}
-
-
-static void waitForButton2Press(void) {
-  do { _delay_ms(50); } while (pin_is_high(nSW2));
-  do { _delay_ms(50); } while (pin_is_low(nSW2));
-}
 
 
 static void waitMillis(uint16_t ms) {
@@ -295,15 +330,15 @@ static void writeByte(uint8_t addr, uint8_t data) {
   port_out(ADDRESS, addr);
   port_out(DATA, data);
   /* being conservative with timing here */
-  delay_ns_max(1000);
+  delay_ns_max(300);
   pin_low(nCE);
-  delay_ns_max(1000);
+  delay_ns_max(300);
   pin_low(nWR);
-  delay_ns_max(1000);
+  delay_ns_max(300);
   pin_high(nWR);
-  delay_ns_max(1000);
+  delay_ns_max(300);
   pin_high(nCE);
-  delay_ns_max(1000);
+  delay_ns_max(300);
 }
 
 
@@ -312,17 +347,18 @@ static uint8_t readByte(uint8_t addr) {
   /* set up address lines and tristate data lines */
   port_out(ADDRESS, addr);
   port_inputs(DATA);
-  delay_ns_max(1000);
+  delay_ns_max(300);
   pin_low(nCE);
-  delay_ns_max(1000);
+  delay_ns_max(300);
   pin_low(nRD);
-  delay_ns_max(1000);
+  delay_ns_max(300);
   uint8_t data = port_value(DATA);
   pin_high(nRD);
-  delay_ns_max(1000);
+  delay_ns_max(300);
   pin_high(nCE);
-  delay_ns_max(1000);
+  delay_ns_max(300);
   port_outputs(DATA);
+  delay_ns_max(300);
   return data;
 }
 
@@ -407,13 +443,6 @@ static void displayString_P(PGM_P str) {
 }
 
 
-static void fillDisplay(uint8_t c) {
-  for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
-    displayChar(pos, c);
-  }
-}
-
-
 static void fillDisplayGradual(uint8_t c, uint16_t delay) {
   for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
     displayChar(pos, c);
@@ -469,7 +498,7 @@ static void showASCIIValues(uint16_t delay) {
 
 
 static void testBlanking(uint16_t delay) {
-  if (!disp.quirks.has_blanking) { return; }
+  if (!disp.quirks.has_blanking_pin) { return; }
   displayString_P(msg_abcdefgh);
   waitMillis(delay);
   /* flash three times */
@@ -514,6 +543,7 @@ static void testCursor(uint16_t delay) {
 /* HDSP-2xxx only */
 static void testFlash(uint16_t delay) {
   if (!disp.quirks.controlreg_hdsp2xxx) { return; }
+  //!!! TODO: hard-reset to synchronize flashing?
   /* clear flash from all positions */
   setFlashMask(0);
   /* flash on */
@@ -552,7 +582,8 @@ static void setUserDefinedChar_P(uint8_t idx, PGM_P pattern) {
 
 
 /* HDSP-2xxx only */
-static void testUserDefinedChars(uint16_t delay) {
+static void testUserDefinedChars(uint16_t delay)
+{
   if (!disp.quirks.controlreg_hdsp2xxx) { return; }
   displayString_P(msg_udc_test);
   waitMillis(delay<<3);
@@ -578,7 +609,8 @@ static void testUserDefinedChars(uint16_t delay) {
 }
 
 
-static void testReadback(uint16_t delay) {
+static void testReadback(uint16_t delay)
+{
   if (!disp.quirks.has_read) { return; }
   displayString_P(msg_readtest);
   waitMillis(delay);
@@ -587,6 +619,8 @@ static void testReadback(uint16_t delay) {
   uint8_t writeValue = 1;
   for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
     writeByte(pos|_BV(ADDR_FL)|_BV(ADDR_A4)|_BV(ADDR_A3), writeValue);
+    /* this delay makes 2 of my PD2816s fail, bit 5 seems to get clobbered */
+    /* on the next cycle of the multiplex timer */
     _delay_ms(10);
     writeValue <<= 1;
   }
@@ -597,7 +631,7 @@ static void testReadback(uint16_t delay) {
     if (readValue != expectedReadValue) {
       displayString_P(msg_readfail);
       displayChar(2, '0'+pos);
-      waitMillis(5000); /* long pause, then continue */
+      waitMillis(5000); /* long pause, then bail out of test */
       return;
     }
     expectedReadValue <<= 1;
@@ -613,7 +647,7 @@ static void testReadback(uint16_t delay) {
   if (readValue != expectedReadValue) {
     displayString_P(msg_readfail);
     displayChar(2, 'C');
-    waitMillis(5000); /* long pause, then continue */
+    waitMillis(5000); /* long pause, then bail out of test */
     return;
   }
 
@@ -623,7 +657,8 @@ static void testReadback(uint16_t delay) {
 }
 
 
-static void testControlRegisterPD2816(uint16_t delay) {
+static void testControlRegisterPD2816(uint16_t delay)
+{
   /* test brightness levels */
   displayString_P(msg_brightness_25);
   writeControlRegister(CR_PD2816_BRIGHTNESS_25);
@@ -635,15 +670,20 @@ static void testControlRegisterPD2816(uint16_t delay) {
   writeControlRegister(CR_PD2816_BRIGHTNESS_100);
   waitMillis(delay);
   /* test highlight styles */
+  /* hard-resets merely reset the multiplex/blink phase */
+  hardResetDisplay();
   displayString_P(msg_underline);
   writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_ATTRS_ON|CR_PD2816_CHAR_SOLID|CR_PD2816_UNDERLINE_SOLID);
   waitMillis(delay<<2);
+  hardResetDisplay();
   displayString_P(msg_charblink_underline);
   writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_ATTRS_ON|CR_PD2816_CHAR_BLINK|CR_PD2816_UNDERLINE_SOLID);
   waitMillis(delay<<2);
+  hardResetDisplay();
   displayString_P(msg_underline_blink);
   writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_ATTRS_ON|CR_PD2816_CHAR_SOLID|CR_PD2816_UNDERLINE_BLINK);
   waitMillis(delay<<2);
+  hardResetDisplay();
   displayString_P(msg_char_and_underline_blink);
   writeControlRegister(CR_PD2816_BRIGHTNESS_100|CR_PD2816_ATTRS_ON|CR_PD2816_CHAR_BLINK|CR_PD2816_UNDERLINE_BLINK);
   waitMillis(delay<<2);
@@ -651,9 +691,10 @@ static void testControlRegisterPD2816(uint16_t delay) {
   writeControlRegister(CR_PD2816_BRIGHTNESS_100);
   waitMillis(delay<<2);
   /* test full display blink */
+  hardResetDisplay();
   displayString_P(msg_blink_all);
   writeControlRegister(CR_PD2816_BLINK_DISPLAY|CR_PD2816_BRIGHTNESS_100);
-  waitMillis(delay<<2);
+  waitMillis(delay<<3);
   /* all-segments lamp test */
   displayString_P(msg_lamp_test);
   writeControlRegister(CR_PD2816_BRIGHTNESS_50);
@@ -672,7 +713,9 @@ static void testControlRegisterPD2816(uint16_t delay) {
 }
 
 
-static void testControlRegisterHDSP2xxx(uint16_t delay) {
+static void testControlRegisterHDSP2xxx(uint16_t delay)
+{
+  //!!! TODO: hard-reset to synchronize flashing?
   /* test brightness levels */
   displayString_P(msg_brightness_13);
   writeControlRegister(CR_HDSP_BRIGHTNESS_13);
@@ -704,8 +747,10 @@ static void testControlRegisterHDSP2xxx(uint16_t delay) {
   writeControlRegister(CR_HDSP_BRIGHTNESS_100);
   waitMillis(delay<<1);
   writeControlRegister(CR_HDSP_SELF_TEST_START);
-  /* wait for test to finish */
-  waitMillis(HDSP_SELF_TEST_DURATION_MS);
+  /* wait for test to finish--blink LED so we know things haven't crashed */
+  for (uint8_t i = 0; i < HDSP_SELF_TEST_DURATION_MS/INTER_CHAR_DELAY_MS; i++) {
+    waitMillis(INTER_CHAR_DELAY_MS);
+  }
   /* check result */
   uint8_t result = readControlRegister();
   if (result & CR_HDSP_SELF_TEST_RESULT) {
@@ -713,7 +758,7 @@ static void testControlRegisterHDSP2xxx(uint16_t delay) {
     waitMillis(delay<<2);
   } else {
     displayString_P(msg_selftest_fail);
-    while (1) {} __builtin_unreachable(); /* hang here if test failed */
+    waitMillis(5000); /* long pause if selftest fails */
   }
 
   /* clear display and restore full brightness */
@@ -721,7 +766,8 @@ static void testControlRegisterHDSP2xxx(uint16_t delay) {
 }
 
 
-static void testControlRegister(uint16_t delay) {
+static void testControlRegister(uint16_t delay)
+{
   if (disp.quirks.controlreg_pd2816) {
     testControlRegisterPD2816(delay);
   } else if (disp.quirks.controlreg_hdsp2xxx) {
@@ -730,11 +776,68 @@ static void testControlRegister(uint16_t delay) {
 }
 
 
-static void menu(void) {
-  setDisplayType(DL1416T);
+static void setDisplayType(enum display_type type) {
+  memcpy_P(&disp, DISPLAYS+type, sizeof(disp));
   softResetDisplay();
-  displayString_P(msg_dl1416);
-  waitForButton2Press();
+}
+
+
+/* Waits until a button is pressed and released, returning true if SW2 was */
+/* pressed, and false if SW1 was pressed. */
+/* (Does not detect both buttons pressed simultaneously.) */
+static bool waitForButtonPress(void) {
+  uint8_t buttons = 0;
+  uint8_t ret;
+  do {
+    buttons = pin_is_low(nSW1) | (pin_is_low(nSW2)<<1);
+    _delay_ms(50); /* long delay to for debouncing */
+  } while (buttons == 0);
+  /* return value is true if SW2 was pressed, false otherwise */
+  ret = (buttons & 2) != 0;
+  /* wait for release */
+  do {
+    buttons = pin_is_low(nSW1) | (pin_is_low(nSW2)<<1);
+    _delay_ms(50);
+  } while (buttons != 0);
+  return ret;
+}
+
+
+static inline void waitForButton2Press(void) {
+  while (waitForButtonPress() == 0) {}
+}
+
+
+static void menu(void)
+{
+  const struct menu_item *start = main_menu;
+  const struct menu_item *current = start;
+  struct menu_item item;
+  while (1) {
+    memcpy_P(&item, current, sizeof(struct menu_item));
+    if (!item.text) {
+      /* loop around to menu start */
+      current = start;
+      memcpy_P(&item, current, sizeof(struct menu_item));
+    }
+    displayString_P(item.text);
+    /* button 1: advance to next menu item */
+    if (waitForButtonPress() == 0) {
+      current++;
+    }
+    /* button 2: activate current menu item */
+    else {
+      if (item.ff == 0xFF) {
+        /* set display type and return */
+        setDisplayType(item.disptype);
+        return;
+      } else {
+        /* enter submenu */
+        start = item.submenu;
+        current = start;
+      }
+    }
+  }
 }
 
 
@@ -778,25 +881,24 @@ int main(void)
     /* inserted at the same time */
     if (pin_is_low(HDSPCLK)) {
       setDisplayType(HDSP2xxx);
-      softResetDisplay();
       displayString_P(msg_hdsp2xxx);
       waitForButton2Press();
       goto run;
     } else if (pin_is_low(PD2816CLK)) {
       setDisplayType(PD2816);
-      softResetDisplay();
       displayString_P(msg_pd2816);
       waitForButton2Press();
       goto run;
     }
     _delay_us(1);
   }
-  softResetDisplay();
+  /* if neither display type detected, show the menu */
+  setDisplayType(DL1414);
   menu();
 
 run:
 
-  /* pressing Button 1 reboots the tester */
+  /* pressing SW1 reboots the tester */
   pin_ctrl(nSW1) |= PORT_ISC0_bm|PORT_ISC1_bm;
   sei();
 
