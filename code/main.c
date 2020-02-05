@@ -372,7 +372,6 @@ static const struct menu main_menu PROGMEM = {
 
 static struct display_spec disp = {0};
 
-
 static void waitMillis(uint16_t ms) {
   pin_toggle(LED);
   do {
@@ -383,8 +382,20 @@ static void waitMillis(uint16_t ms) {
 }
 
 
+/* rev 1 board has A0 and A1 swapped on the DL3416/3422 footprint */
+static bool a0_a1_not_swapped;
+static uint8_t fixAddress(uint8_t addr) {
+  if (a0_a1_not_swapped) { return addr; }
+  bool a0 = addr & 1;
+  bool a1 = (addr & 2) >> 1;
+  addr &= 0b11111100;
+  return addr | a1 | (a0<<1);
+}
+
+
 static void writeByte(uint8_t addr, uint8_t data) {
   /* set up address and data */
+  addr = fixAddress(addr);
   port_out(ADDRESS, addr);
   port_out(DATA, data);
   /* being conservative with timing here */
@@ -403,6 +414,7 @@ static void writeByte(uint8_t addr, uint8_t data) {
 /* HDSP-2xxx and PD2816 only */
 static uint8_t readByte(uint8_t addr) {
   /* set up address lines and tristate data lines */
+  addr = fixAddress(addr);
   port_out(ADDRESS, addr);
   port_inputs(DATA);
   delay_ns_max(300);
@@ -948,6 +960,18 @@ int main(void)
   pin_input_pullup(HDSPCLK);
   pin_input_pullup(PD2816CLK);
   hardResetDisplay();
+
+  /* if SW2 is held down on powerup, toggle the swap-A1/A0 bit */
+  /* for rev1 boards that have A0/A1 swapped on the DL3416/3422 footprint */
+  _delay_ms(50);
+  a0_a1_not_swapped = !!(eeprom_read_byte((void*)7) & 1);
+  if (pin_is_low(nSW2)) {
+    a0_a1_not_swapped = !a0_a1_not_swapped;
+    eeprom_update_byte((void*)7, a0_a1_not_swapped);
+    eeprom_busy_wait();
+    while (pin_is_low(nSW2)) {}
+    _delay_ms(50);
+  }
 
   /* if an HDSP/PDSP/PD2816 is present, we'll see a clock signal */
   uint8_t count = 0; /* poll 256 times, once per microsecond */
