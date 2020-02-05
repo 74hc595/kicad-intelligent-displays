@@ -465,6 +465,13 @@ static void displayString_P(PGM_P str) {
 }
 
 
+static void fillDisplay(uint8_t c, uint8_t ndigits) {
+  for (uint8_t pos = 0; pos < ndigits; pos++) {
+    displayChar(pos, c);
+  }
+}
+
+
 static void fillDisplayGradual(uint8_t c, uint16_t delay) {
   for (uint8_t pos = 0; pos < disp.num_digits; pos++) {
     displayChar(pos, c);
@@ -841,6 +848,7 @@ static void menu(void)
   const struct menu_item *start = main_menu;
   const struct menu_item *current = start;
   struct menu_item item;
+  fillDisplay(' ', 8);
   while (1) {
     memcpy_P(&item, current, sizeof(struct menu_item));
     if (!item.text) {
