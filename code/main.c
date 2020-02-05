@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include <avr/io.h>
+#include <avr/eeprom.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include <util/delay.h>
@@ -291,47 +291,83 @@ static const struct display_spec DISPLAYS[NUM_DISPLAY_TYPES] PROGMEM =
 };
 
 
+#define COUNT_OF(arr) (sizeof(arr)/sizeof((arr)[0]))
+
+struct menu;
+
 struct menu_item {
   PGM_P text;
   union {
-    const struct menu_item * PROGMEM submenu;
+    const struct menu * PROGMEM submenu;
     struct { uint8_t disptype; uint8_t ff; };
   };
 };
 
-static const struct menu_item menu_dl1414[] PROGMEM = {
+struct menu {
+  uint8_t idx_eeaddr;
+  uint8_t nitems;
+  const struct menu_item * PROGMEM items;
+};
+
+static const struct menu_item menu_items_dl1414[] PROGMEM = {
   { .text=msg_segmented, .disptype=DL1414, .ff=0xFF },
   { .text=msg_matrix, .disptype=DLX1414, .ff=0xFF },
-  {0}
 };
 
-static const struct menu_item menu_dl1416[] PROGMEM = {
+static const struct menu menu_dl1414 PROGMEM = {
+  .idx_eeaddr = 2,
+  .nitems = COUNT_OF(menu_items_dl1414),
+  .items = menu_items_dl1414
+};
+
+static const struct menu_item menu_items_dl1416[] PROGMEM = {
   { .text=msg_dl1416t, .disptype=DL1416T, .ff=0xFF },
   { .text=msg_dl1416b, .disptype=DL1416B, .ff=0xFF },
-  {0}
 };
 
-static const struct menu_item menu_dl2416[] PROGMEM = {
+static const struct menu menu_dl1416 PROGMEM = {
+  .idx_eeaddr = 3,
+  .nitems = COUNT_OF(menu_items_dl1416),
+  .items = menu_items_dl1416
+};
+
+static const struct menu_item menu_items_dl2416[] PROGMEM = {
   { .text=msg_segmented, .disptype=DL2416, .ff=0xFF },
   { .text=msg_matrix, .disptype=DLX2416, .ff=0xFF },
-  {0}
 };
 
-static const struct menu_item menu_dl3416[] PROGMEM = {
+static const struct menu menu_dl2416 PROGMEM = {
+  .idx_eeaddr = 4,
+  .nitems = COUNT_OF(menu_items_dl2416),
+  .items = menu_items_dl2416
+};
+
+static const struct menu_item menu_items_dl3416[] PROGMEM = {
   { .text=msg_segmented, .disptype=DL3416, .ff=0xFF },
   { .text=msg_matrix, .disptype=DLX3416, .ff=0xFF },
-  {0}
 };
 
-static const struct menu_item main_menu[] PROGMEM = {
-  { .text=msg_dl1414, .submenu=menu_dl1414 },
-  { .text=msg_dl1416, .submenu=menu_dl1416 },
-  { .text=msg_dl1814, .disptype=DL1814, .ff=0xFF },
-  { .text=msg_dl2416, .submenu=menu_dl2416 },
-  { .text=msg_dl3416, .submenu=menu_dl3416 },
-  { .text=msg_dl3422, .disptype=DL3422, .ff=0xFF },
-  {0}
+static const struct menu menu_dl3416 PROGMEM = {
+  .idx_eeaddr = 5,
+  .nitems = COUNT_OF(menu_items_dl3416),
+  .items = menu_items_dl3416
 };
+
+static const struct menu_item main_menu_items[] PROGMEM = {
+  { .text=msg_dl1414, .submenu=&menu_dl1414 },
+  { .text=msg_dl1416, .submenu=&menu_dl1416 },
+  { .text=msg_dl1814, .disptype=DL1814, .ff=0xFF },
+  { .text=msg_dl2416, .submenu=&menu_dl2416 },
+  { .text=msg_dl3416, .submenu=&menu_dl3416 },
+  { .text=msg_dl3422, .disptype=DL3422, .ff=0xFF },
+};
+
+static const struct menu main_menu PROGMEM = {
+  .idx_eeaddr = 1,
+  .nitems = COUNT_OF(main_menu_items),
+  .items = main_menu_items
+};
+
 
 
 static struct display_spec disp = {0};
@@ -845,32 +881,35 @@ static inline void waitForButton2Press(void) {
 
 static void menu(void)
 {
-  const struct menu_item *start = main_menu;
-  const struct menu_item *current = start;
-  struct menu_item item;
   fillDisplay(' ', 8);
+
+  struct menu current_menu;
+  memcpy_P(&current_menu, &main_menu, sizeof(struct menu));
+  uint8_t idx = eeprom_read_byte((void*)((int)current_menu.idx_eeaddr));
+  if (idx >= current_menu.nitems) { idx = 0; }
+
+  struct menu_item item;
   while (1) {
-    memcpy_P(&item, current, sizeof(struct menu_item));
-    if (!item.text) {
-      /* loop around to menu start */
-      current = start;
-      memcpy_P(&item, current, sizeof(struct menu_item));
-    }
+    memcpy_P(&item, current_menu.items+idx, sizeof(struct menu_item));
     displayString_P(item.text);
     /* button 1: advance to next menu item */
     if (waitForButtonPress() == 0) {
-      current++;
+      idx++;
+      if (idx >= current_menu.nitems) { idx = 0; }
     }
     /* button 2: activate current menu item */
     else {
+      /* save current index to eeprom */
+      eeprom_update_byte((void*)((int)current_menu.idx_eeaddr), idx);
       if (item.ff == 0xFF) {
         /* set display type and return */
         setDisplayType(item.disptype);
         return;
       } else {
         /* enter submenu */
-        start = item.submenu;
-        current = start;
+        memcpy_P(&current_menu, item.submenu, sizeof(struct menu));
+        idx = eeprom_read_byte((void*)((int)current_menu.idx_eeaddr));
+        if (idx >= current_menu.nitems) { idx = 0; }
       }
     }
   }
