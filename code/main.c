@@ -216,6 +216,28 @@ static const char udc2[] PROGMEM = {
   0b00000000
 };
 
+
+/* Boxed hex digits 0-9, A-F */
+static const char udc_hexdigits[] PROGMEM = {
+  0b11111, 0b10001, 0b10101, 0b10101, 0b10101, 0b10001, 0b11111,
+  0b11111, 0b11011, 0b10011, 0b11011, 0b11011, 0b10001, 0b11111,
+  0b11111, 0b10001, 0b11101, 0b10001, 0b10111, 0b10001, 0b11111,
+  0b11111, 0b10001, 0b11101, 0b11001, 0b11101, 0b10001, 0b11111,
+  0b11111, 0b10101, 0b10101, 0b10001, 0b11101, 0b11101, 0b11111,
+  0b11111, 0b10001, 0b10111, 0b10001, 0b11101, 0b10001, 0b11111,
+  0b11111, 0b10001, 0b10111, 0b10001, 0b10101, 0b10001, 0b11111,
+  0b11111, 0b10001, 0b10101, 0b10101, 0b11101, 0b11101, 0b11111,
+  0b11111, 0b10001, 0b10101, 0b10001, 0b10101, 0b10001, 0b11111,
+  0b11111, 0b10001, 0b10101, 0b10001, 0b11101, 0b10001, 0b11111,
+  0b11111, 0b10001, 0b10101, 0b10001, 0b10101, 0b10101, 0b11111,
+  0b11111, 0b10001, 0b10101, 0b10011, 0b10101, 0b10001, 0b11111,
+  0b11111, 0b10001, 0b10111, 0b10111, 0b10111, 0b10001, 0b11111,
+  0b11111, 0b10011, 0b10101, 0b10101, 0b10101, 0b10011, 0b11111,
+  0b11111, 0b10001, 0b10111, 0b10011, 0b10111, 0b10001, 0b11111,
+  0b11111, 0b10001, 0b10111, 0b10011, 0b10111, 0b10111, 0b11111,
+};
+
+
 static const struct display_spec DISPLAYS[NUM_DISPLAY_TYPES] PROGMEM =
 {
   [DL1414] = {
@@ -264,7 +286,7 @@ static const struct display_spec DISPLAYS[NUM_DISPLAY_TYPES] PROGMEM =
   },
   [HDSP2xxx] = {
     .quirks={ .left_to_right_digit_numbering=1, .has_read=1, .controlreg_hdsp2xxx=1 },
-    .num_digits=8, .asciival_min='\0', .asciival_max='\x7f',
+    .num_digits=8, .asciival_min='\0', .asciival_max='\x8f',
   },
 };
 
@@ -605,6 +627,12 @@ static void testUserDefinedChars(uint16_t delay)
       setUserDefinedChar_P(8+pos, udc2+i);
       waitMillis(delay);
     }
+  }
+
+  const char *pattern = udc_hexdigits;
+  for (uint8_t i = 0; i < 16; i++) {
+    setUserDefinedChar_P(i, pattern);
+    pattern += 7;
   }
 }
 
