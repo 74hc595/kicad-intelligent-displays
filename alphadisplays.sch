@@ -1,12 +1,11 @@
 EESchema Schematic File Version 4
-LIBS:alphadisplays-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Intelligent Alphanumeric Display Tester"
-Date "2020-01-22"
+Date "2020-02-06"
 Rev "1.1"
 Comp "Matt Sarnoff (msarnoff.org)"
 Comment1 ""
@@ -581,7 +580,7 @@ U 1 1 5E1B15CE
 P 4250 3600
 F 0 "D6" H 5450 4100 50  0000 R CNN
 F 1 "HDSP-250x" H 5225 4100 50  0000 R CNN
-F 2 "Display_IntelligentAlpha:HDSP-250x_DIP28" H 3650 4200 50  0001 C CNN
+F 2 "Display_IntelligentAlpha:HDSP-250x" H 3650 4200 50  0001 C CNN
 F 3 "" H 3400 4200 50  0001 C CNN
 	1    4250 3600
 	1    0    0    -1  
@@ -592,7 +591,7 @@ U 1 1 5E1C8D40
 P 6800 3600
 F 0 "D7" H 8000 4100 50  0000 R CNN
 F 1 "PDSP188x" H 7800 4100 50  0000 R CNN
-F 2 "Display_IntelligentAlpha:PDSP188x_DIP30" H 6200 4200 50  0001 C CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 6200 4200 50  0001 C CNN
 F 3 "" H 5950 4200 50  0001 C CNN
 	1    6800 3600
 	1    0    0    -1  
@@ -1050,25 +1049,14 @@ Wire Bus Line
 	11025 2625 11025 675 
 Connection ~ 11025 2625
 $Comp
-L MCU_Microchip_ATmega:ATmega4809-A U1
-U 1 1 5E135035
-P 1650 2325
-F 0 "U1" H 1775 975 50  0000 C CNN
-F 1 "ATmega4809-A" H 2025 900 50  0000 C CNN
-F 2 "Package_QFP:TQFP-48_7x7mm_P0.5mm" H 1650 2325 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/40002016A.pdf" H 1650 2325 50  0001 C CNN
-	1    1650 2325
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:VCC #PWR0120
 U 1 1 5E1A2680
-P 1350 800
-F 0 "#PWR0120" H 1350 650 50  0001 C CNN
-F 1 "VCC" H 1350 950 50  0000 C CNN
-F 2 "" H 1350 800 50  0001 C CNN
-F 3 "" H 1350 800 50  0001 C CNN
-	1    1350 800 
+P 1650 900
+F 0 "#PWR0120" H 1650 750 50  0001 C CNN
+F 1 "VCC" H 1650 1050 50  0000 C CNN
+F 2 "" H 1650 900 50  0001 C CNN
+F 3 "" H 1650 900 50  0001 C CNN
+	1    1650 900 
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1281,7 +1269,7 @@ L Device:LED D9
 U 1 1 5E4C23CC
 P 825 3950
 F 0 "D9" V 864 3833 50  0000 R CNN
-F 1 "LED" V 773 3833 50  0000 R CNN
+F 1 "1206 LED" V 773 3833 50  0000 R CNN
 F 2 "LED_SMD:LED_1206_3216Metric" H 825 3950 50  0001 C CNN
 F 3 "~" H 825 3950 50  0001 C CNN
 	1    825  3950
@@ -1375,7 +1363,7 @@ U 1 1 5E5D2B04
 P 4200 5250
 F 0 "SW2" H 4200 5393 50  0000 C CNN
 F 1 "SW_SPST" H 4200 5394 50  0001 C CNN
-F 2 "Button_Switch_THT:SW_Tactile_SPST_Angled_PTS645Vx31-2LFS" H 4200 5250 50  0001 C CNN
+F 2 "Button_Switch_SMD:Panasonic_EVQPUL_EVQPUC" H 4200 5250 50  0001 C CNN
 F 3 "~" H 4200 5250 50  0001 C CNN
 	1    4200 5250
 	-1   0    0    -1  
@@ -1401,10 +1389,10 @@ U 1 1 5E54CA46
 P 3450 5250
 F 0 "SW1" H 3450 5393 50  0000 C CNN
 F 1 "SW_SPST" H 3450 5394 50  0001 C CNN
-F 2 "Button_Switch_THT:SW_Tactile_SPST_Angled_PTS645Vx31-2LFS" H 3450 5250 50  0001 C CNN
+F 2 "Button_Switch_SMD:Panasonic_EVQPUL_EVQPUC" H 3450 5250 50  0001 C CNN
 F 3 "~" H 3450 5250 50  0001 C CNN
 	1    3450 5250
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:C C2
@@ -1465,27 +1453,24 @@ Wire Wire Line
 	2250 3025 2700 3025
 Text Label 2700 3025 2    50   ~ 0
 PD2816CLK
-$Comp
-L Device:D D10
-U 1 1 5E1F032B
-P 1500 800
-F 0 "D10" H 1500 584 50  0000 C CNN
-F 1 "D" H 1500 675 50  0000 C CNN
-F 2 "Diode_SMD:D_SOD-323" H 1500 800 50  0001 C CNN
-F 3 "~" H 1500 800 50  0001 C CNN
-	1    1500 800 
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
-	1650 800  1650 925 
-Connection ~ 1650 925 
-Text Notes 1675 875  0    50   ~ 0
-Diode prevents UPDI leakage\nfrom powering the displays 
+	1650 900  1650 925 
 NoConn ~ 2250 2125
 Text Notes 825  1625 2    50   ~ 0
 ~CU
 Text Notes 5225 5175 0    79   ~ 0
 Use round machine-pin 0.1" SIP sockets for D1-D8.\nMany displays have short pins that don't make good contact\nin standard rectangular 0.1" header sockets.
+$Comp
+L MCU_Microchip_ATmega:ATmega4809-A U1
+U 1 1 5E3DEDA3
+P 1650 2325
+F 0 "U1" H 1200 975 50  0000 C CNN
+F 1 "ATmega809-A" H 2025 975 50  0000 C CNN
+F 2 "Package_QFP:TQFP-48_7x7mm_P0.5mm" H 1650 2325 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/40002016A.pdf" H 1650 2325 50  0001 C CNN
+	1    1650 2325
+	1    0    0    -1  
+$EndComp
 Wire Bus Line
 	8825 2700 11025 2700
 Wire Bus Line
@@ -1496,4 +1481,5 @@ Wire Bus Line
 	3225 2625 11025 2625
 Wire Bus Line
 	3250 4700 11025 4700
+Connection ~ 1650 925 
 $EndSCHEMATC

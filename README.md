@@ -1,7 +1,5 @@
 # Intelligent Display Symbols/Footprints for KiCad
 
-### !!! These have not been tested !!!
-
 KiCad symbols and footprints for 4- and 8-character intelligent segmented/dot-matrix alphanumeric displays like the DL1414, DL2416, HDSP-2112, PDSP1881, etc.
 
 At this time, the library does not include symbols/footprints for the exotic/mil-spec parts.
@@ -15,6 +13,10 @@ Some parts, like the PDSP188x and HDSP-2xxx, do not have pins in all positions. 
 ![HDSP-2112](http://www.decadecounter.com/vta/pic/hdsp2112.jpg)
 
 ![DLG3416](http://www.decadecounter.com/vta/pic/dlg3416_1.jpg)
+
+## Test fixture
+
+Included in the KiCad project is a tester board based on the atmega809 microcontroller. The `code` folder contains the firmware, and instructions are in `code/main.c`. A prebuilt hex file is also provided.
 
 ## References
 

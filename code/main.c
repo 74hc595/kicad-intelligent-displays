@@ -1,3 +1,131 @@
+/**
+ * Intelligent alphanumeric display tester
+ * Matt Sarnoff (msarnoff.org)
+ * February 5, 2020
+ *
+ * Tests the functionality and features of several types of 4-character and
+ * 8-character "smart"/"intelligent" alphanumeric LED displays manufactured
+ * by HP/Litronix/Siemens/Osram/Avago/Broadcom.
+ *
+ * The following devices are supported:
+ * - DL1414, HPDL-1414 (4-char segmented), DLx-1414, HDLx-1414 (4-char dot matrix)
+ * - DL1416, DL1416T, DL1416B, SP1-16 (4-char segmented)
+ * - DL1814 (8-char segmented)
+ * - DL2416, HPDL-2416 (4-char segmented), DLx-2416, HDLx-2416 (4-char dot matrix)
+ * - DL3416 (4-char segmented), DLx-3416, HDLx-3416 (4-char dot matrix)
+ * - DL3422 (4-char segmented)
+ * - PD2816 (8-char segmented)
+ * - HDSP-2xxx, PD188x (8-char dot matrix)
+ *
+ * Not currently supported:
+ * - PD243x, PD353x, PD443x (4-char dot matrix)
+ * - Extended features of HDLx-2416 and HDLx-3416
+ *
+ * Controls (during menu):
+ * - SW1: advance to next menu item
+ * - SW2: confirm menu item
+ *
+ * Controls (during test):
+ * - SW1: return to main menu
+ * - SW2: hold to freeze test, release to resume
+ *
+ * PD2816 and HDSP-2xxx/PD188x devices are auto-detected by checking for the
+ * presence of their clock output signals. On powerup, if one of these devices
+ * is detected, the display will show "HDSP2xxx" or "PD2816  ". Press SW2 to
+ * begin the test.
+ *
+ * Otherwise, a menu is shown. Press SW1 to cycle through the menu items to
+ * select the display type. Press SW2 to confirm. Some types have an additional
+ * submenu, requiring the user to select "SEGM" (for segmented displays) or
+ * "MTRX" (for 5x7 dot-matrix displays).
+ * The full menu structure is:
+ *     "1414"
+ *       "SEGM" (DL1414, HPDL-1414)
+ *       "MTRX" (DLx-1414, HDLx-1414)
+ *     "1416"
+ *       "'16T" (DL1416, DL1416T, SP1-16)
+ *       "'16B" (DL1416B)
+ *     "1814" (DL1814)
+ *     "2416"
+ *       "SEGM" (DL2416, HPDL-2416)
+ *       "MTRX" (DLx-2416, HDLx-2416)
+ *     "3416"
+ *       "SEGM" (DL3416)
+ *       "MTRX" (DLx-3416, HDLx-3416)
+ *     "3422" (DL3422)
+ *
+ * Menu selections are saved in nonvolatile memory and recalled at powerup to
+ * facilitate testing multiple displays in a row.
+ *
+ * Revision 1 of the tester board had pins A0 and A1 swapped on the DL3416/3422
+ * footprint. This will cause the middle two characters to be swapped when
+ * testing DL3416/3422 devices. (Others will not be affected.) To compensate for
+ * this, hold down SW2 when powering on the board. This will make the display
+ * appear correct for DL3416/3422, but the middle characters will be swapped
+ * on all other display types. The setting is saved in nonvolatile memory and
+ * recalled at powerup. "Normal" behavior can be restored by performing the
+ * same procedure a second time.
+ *
+ * Test suite
+ * ----------
+ * 1. Display "ABCD" or "ABCDEFGH".
+ * 2. Gradually replace each character with uppercase "U" from left to right.
+ *    (tests even-numbered data lines: U is 0b1010101)
+ * 3. Gradually replace each character with "*" from left to right.
+ *    (tests odd-numbered data lines: * is 0b0101010)
+ * 4. Gradually replace each character with uppercase "O" from left to right.
+ *    (tests segments not illuminated with U and *)
+ * 5. Gradually replace each character with "." from left to right.
+ *    (tests extra dot segment on some display types)
+ * 6. (PD2816/HDSP-2xxx only) Test read-back from display RAM and control
+ *    register. Will show "READ OK" if the test passes.
+ * 7. (DL1416/2416/3416/3422 only) Test cursor.
+ *    7a. Display "ABCD".
+ *    7b. Show the cursor character in each digit indivitually from right to left.
+ *    7c. Show the cursor character in the left 2 digits.
+ *    7d. Show the cursor character in the right 2 digits.
+ *    7e. Show the cursor character in all digits.
+ *    7f. Turn off cursor.
+ * 8. (HDSP-2xxx only) Test flash RAM.
+ *     8a. Display "ABCDEFGH".
+ *     8b. Flash each digit individually from left to right.
+ *     8c. Flash the left 4 digits.
+ *     8d. Flash the right 4 digits.
+ *     8e. Flash all digits.
+ *     8f. Turn off flashing.
+ * 9. (DL1814/2416/3416/3422) Test blanking pin.
+ *     9a. Display "ABCD" or "ABCDEFGH".
+ *     9b. Flash the display three times.
+ * 10. (HDSP-2xxx only) Test user-defined-character RAM.
+ *     10a. Blank the display.
+ *     10b. Animate a pattern scrolling upward on each digit from left to right.
+ *          (Tests user defined characters 0-7.)
+ *     10c. Animate another pattern scrolling upward on each character from left
+ *          to right. (Tests user defined characters 8-F.)
+ * 11. (PD2816/HDSP-2xxx only) Test control register features.
+ *     11a. Show all brightness levels.
+ *     11b. (PD2816 only) Test highlight attribute styles: underline, blinking
+ *          character with solid underline, blinking underline, and blinking
+ *          character with blinking underline.
+ *     11c. Test full display blink.
+ *     11d. (PD2816 only) Lamp test. Alternate between the text "LAMPTEST" and
+ *          all-segments-illuminated twice.
+ *     11e. (HDSP-2xxx only) Perform built-in self-test. This takes approx.
+ *          7 seconds. The display will show several patterns and will be blank
+ *          for several seconds. "S.T.PASS" indicates the display passed its
+ *          self-test. "S.T.FAIL" indicates failure.
+ * 12. Show each displayable character and its code point. The  2-digit ASCII
+ *     code shown in hexadecimal in leftmost two digits. Third digit is blank.
+ *     Remaining digits show the character.
+ * 13. Display "DONE".
+ * 14. Scroll the full displayable character set. Loops continuously until SW1
+ *     is pressed or power is disconnected.
+ *
+ * Note: It's not recommended to plug in or unplug displays while the board is
+ * powered up. Even when using a ZIF socket, "hot-swapping" is not recommended.
+ * These displays are old, rare, and expensive!
+ */
+
 #include "pin_xmega.h"
 #include "delay_ns.h"
 
