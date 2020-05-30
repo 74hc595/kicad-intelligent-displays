@@ -1,0 +1,2545 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 3
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D1
+U 1 1 5E9F5B9B
+P 1800 1250
+F 0 "D1" H 2400 1750 50  0000 L CNN
+F 1 "PDSP1881" H 2600 1750 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 1200 1850 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 950 1850 50  0001 C CNN
+	1    1800 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0132
+U 1 1 5EA1BADC
+P 700 700
+F 0 "#PWR0132" H 700 550 50  0001 C CNN
+F 1 "VCC" H 700 850 50  0000 C CNN
+F 2 "" H 700 700 50  0001 C CNN
+F 3 "" H 700 700 50  0001 C CNN
+	1    700  700 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 1750 2900 1750
+$Comp
+L power:GND #PWR0133
+U 1 1 5EA1CCB0
+P 2900 1750
+F 0 "#PWR0133" H 2900 1500 50  0001 C CNN
+F 1 "GND" H 2900 1600 50  0000 C CNN
+F 2 "" H 2900 1750 50  0001 C CNN
+F 3 "" H 2900 1750 50  0001 C CNN
+	1    2900 1750
+	1    0    0    -1  
+$EndComp
+Connection ~ 2900 1750
+Wire Wire Line
+	700  1750 700  1950
+Wire Wire Line
+	800  1750 800  1950
+Text Label 700  1950 1    50   ~ 0
+~RD
+Text Label 800  1950 1    50   ~ 0
+~WR
+Wire Wire Line
+	1050 1750 1050 1950
+Wire Wire Line
+	1150 1750 1150 1950
+Wire Wire Line
+	1250 1750 1250 1950
+Wire Wire Line
+	1350 1750 1350 1950
+Wire Wire Line
+	1450 1750 1450 1950
+Wire Wire Line
+	1550 1750 1550 1950
+Text Label 1050 1950 1    50   ~ 0
+~FL
+Text Label 1150 1950 1    50   ~ 0
+A0
+Text Label 1250 1950 1    50   ~ 0
+A1
+Text Label 1350 1950 1    50   ~ 0
+A2
+Text Label 1450 1950 1    50   ~ 0
+A3
+Text Label 1550 1950 1    50   ~ 0
+A4
+Wire Wire Line
+	1800 1750 1800 1950
+Wire Wire Line
+	1900 1750 1900 1950
+Wire Wire Line
+	2000 1750 2000 1950
+Wire Wire Line
+	2100 1750 2100 1950
+Wire Wire Line
+	2200 1750 2200 1950
+Wire Wire Line
+	2300 1750 2300 1950
+Wire Wire Line
+	2400 1750 2400 1950
+Wire Wire Line
+	2500 1750 2500 1950
+Text Label 1800 1950 1    50   ~ 0
+D0
+Text Label 1900 1950 1    50   ~ 0
+D1
+Text Label 2000 1950 1    50   ~ 0
+D2
+Text Label 2100 1950 1    50   ~ 0
+D3
+Text Label 2200 1950 1    50   ~ 0
+D4
+Text Label 2300 1950 1    50   ~ 0
+D5
+Text Label 2400 1950 1    50   ~ 0
+D6
+Text Label 2500 1950 1    50   ~ 0
+D7
+Wire Wire Line
+	1750 700  1750 625 
+Wire Wire Line
+	1750 625  1450 625 
+Text Label 1450 625  0    50   ~ 0
+~D1EN
+$Comp
+L power:VCC #PWR0134
+U 1 1 5EA28EAA
+P 1850 700
+F 0 "#PWR0134" H 1850 550 50  0001 C CNN
+F 1 "VCC" H 1850 850 50  0000 C CNN
+F 2 "" H 1850 700 50  0001 C CNN
+F 3 "" H 1850 700 50  0001 C CNN
+	1    1850 700 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1950 700  1950 625 
+Wire Wire Line
+	1950 625  2175 625 
+Text Label 2175 625  2    50   ~ 0
+DCLK
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D2
+U 1 1 5EA4AC36
+P 4325 1250
+F 0 "D2" H 4925 1750 50  0000 L CNN
+F 1 "PDSP1881" H 5125 1750 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 3725 1850 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 3475 1850 50  0001 C CNN
+	1    4325 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0135
+U 1 1 5EA4AC40
+P 3225 700
+F 0 "#PWR0135" H 3225 550 50  0001 C CNN
+F 1 "VCC" H 3225 850 50  0000 C CNN
+F 2 "" H 3225 700 50  0001 C CNN
+F 3 "" H 3225 700 50  0001 C CNN
+	1    3225 700 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5325 1750 5425 1750
+$Comp
+L power:GND #PWR0136
+U 1 1 5EA4AC4B
+P 5425 1750
+F 0 "#PWR0136" H 5425 1500 50  0001 C CNN
+F 1 "GND" H 5425 1600 50  0000 C CNN
+F 2 "" H 5425 1750 50  0001 C CNN
+F 3 "" H 5425 1750 50  0001 C CNN
+	1    5425 1750
+	1    0    0    -1  
+$EndComp
+Connection ~ 5425 1750
+Wire Wire Line
+	3225 1750 3225 1950
+Wire Wire Line
+	3325 1750 3325 1950
+Text Label 3225 1950 1    50   ~ 0
+~RD
+Text Label 3325 1950 1    50   ~ 0
+~WR
+Wire Wire Line
+	3575 1750 3575 1950
+Wire Wire Line
+	3675 1750 3675 1950
+Wire Wire Line
+	3775 1750 3775 1950
+Wire Wire Line
+	3875 1750 3875 1950
+Wire Wire Line
+	3975 1750 3975 1950
+Wire Wire Line
+	4075 1750 4075 1950
+Text Label 3575 1950 1    50   ~ 0
+~FL
+Text Label 3675 1950 1    50   ~ 0
+A0
+Text Label 3775 1950 1    50   ~ 0
+A1
+Text Label 3875 1950 1    50   ~ 0
+A2
+Text Label 3975 1950 1    50   ~ 0
+A3
+Text Label 4075 1950 1    50   ~ 0
+A4
+Wire Wire Line
+	4325 1750 4325 1950
+Wire Wire Line
+	4425 1750 4425 1950
+Wire Wire Line
+	4525 1750 4525 1950
+Wire Wire Line
+	4625 1750 4625 1950
+Wire Wire Line
+	4725 1750 4725 1950
+Wire Wire Line
+	4825 1750 4825 1950
+Wire Wire Line
+	4925 1750 4925 1950
+Wire Wire Line
+	5025 1750 5025 1950
+Text Label 4325 1950 1    50   ~ 0
+D0
+Text Label 4425 1950 1    50   ~ 0
+D1
+Text Label 4525 1950 1    50   ~ 0
+D2
+Text Label 4625 1950 1    50   ~ 0
+D3
+Text Label 4725 1950 1    50   ~ 0
+D4
+Text Label 4825 1950 1    50   ~ 0
+D5
+Text Label 4925 1950 1    50   ~ 0
+D6
+Text Label 5025 1950 1    50   ~ 0
+D7
+Wire Wire Line
+	4275 700  4275 625 
+Wire Wire Line
+	4275 625  3975 625 
+Text Label 3975 625  0    50   ~ 0
+~D2EN
+$Comp
+L power:GND #PWR0137
+U 1 1 5EA57B4A
+P 4775 600
+F 0 "#PWR0137" H 4775 350 50  0001 C CNN
+F 1 "GND" H 4775 450 50  0000 C CNN
+F 2 "" H 4775 600 50  0001 C CNN
+F 3 "" H 4775 600 50  0001 C CNN
+	1    4775 600 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4475 700  4475 625 
+Wire Wire Line
+	4475 625  4700 625 
+Text Label 4700 625  2    50   ~ 0
+DCLK
+Wire Wire Line
+	4775 600  4775 525 
+Wire Wire Line
+	4775 525  4375 525 
+Wire Wire Line
+	4375 525  4375 700 
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D3
+U 1 1 5EA60EF2
+P 6850 1250
+F 0 "D3" H 7450 1750 50  0000 L CNN
+F 1 "PDSP1881" H 7650 1750 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 6250 1850 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 6000 1850 50  0001 C CNN
+	1    6850 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0138
+U 1 1 5EA60EFC
+P 5750 700
+F 0 "#PWR0138" H 5750 550 50  0001 C CNN
+F 1 "VCC" H 5750 850 50  0000 C CNN
+F 2 "" H 5750 700 50  0001 C CNN
+F 3 "" H 5750 700 50  0001 C CNN
+	1    5750 700 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7850 1750 7950 1750
+$Comp
+L power:GND #PWR0139
+U 1 1 5EA60F07
+P 7950 1750
+F 0 "#PWR0139" H 7950 1500 50  0001 C CNN
+F 1 "GND" H 7950 1600 50  0000 C CNN
+F 2 "" H 7950 1750 50  0001 C CNN
+F 3 "" H 7950 1750 50  0001 C CNN
+	1    7950 1750
+	1    0    0    -1  
+$EndComp
+Connection ~ 7950 1750
+Wire Wire Line
+	5750 1750 5750 1950
+Wire Wire Line
+	5850 1750 5850 1950
+Text Label 5750 1950 1    50   ~ 0
+~RD
+Text Label 5850 1950 1    50   ~ 0
+~WR
+Wire Wire Line
+	6100 1750 6100 1950
+Wire Wire Line
+	6200 1750 6200 1950
+Wire Wire Line
+	6300 1750 6300 1950
+Wire Wire Line
+	6400 1750 6400 1950
+Wire Wire Line
+	6500 1750 6500 1950
+Wire Wire Line
+	6600 1750 6600 1950
+Text Label 6100 1950 1    50   ~ 0
+~FL
+Text Label 6200 1950 1    50   ~ 0
+A0
+Text Label 6300 1950 1    50   ~ 0
+A1
+Text Label 6400 1950 1    50   ~ 0
+A2
+Text Label 6500 1950 1    50   ~ 0
+A3
+Text Label 6600 1950 1    50   ~ 0
+A4
+Wire Wire Line
+	6850 1750 6850 1950
+Wire Wire Line
+	6950 1750 6950 1950
+Wire Wire Line
+	7050 1750 7050 1950
+Wire Wire Line
+	7150 1750 7150 1950
+Wire Wire Line
+	7250 1750 7250 1950
+Wire Wire Line
+	7350 1750 7350 1950
+Wire Wire Line
+	7450 1750 7450 1950
+Wire Wire Line
+	7550 1750 7550 1950
+Text Label 6850 1950 1    50   ~ 0
+D0
+Text Label 6950 1950 1    50   ~ 0
+D1
+Text Label 7050 1950 1    50   ~ 0
+D2
+Text Label 7150 1950 1    50   ~ 0
+D3
+Text Label 7250 1950 1    50   ~ 0
+D4
+Text Label 7350 1950 1    50   ~ 0
+D5
+Text Label 7450 1950 1    50   ~ 0
+D6
+Text Label 7550 1950 1    50   ~ 0
+D7
+Wire Wire Line
+	6800 700  6800 625 
+Wire Wire Line
+	6800 625  6500 625 
+Text Label 6500 625  0    50   ~ 0
+~D3EN
+$Comp
+L power:GND #PWR0140
+U 1 1 5EA60F37
+P 7300 600
+F 0 "#PWR0140" H 7300 350 50  0001 C CNN
+F 1 "GND" H 7300 450 50  0000 C CNN
+F 2 "" H 7300 600 50  0001 C CNN
+F 3 "" H 7300 600 50  0001 C CNN
+	1    7300 600 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 700  7000 625 
+Wire Wire Line
+	7000 625  7225 625 
+Text Label 7225 625  2    50   ~ 0
+DCLK
+Wire Wire Line
+	7300 600  7300 525 
+Wire Wire Line
+	7300 525  6900 525 
+Wire Wire Line
+	6900 525  6900 700 
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D4
+U 1 1 5EA7FB26
+P 9375 1250
+F 0 "D4" H 9975 1750 50  0000 L CNN
+F 1 "PDSP1881" H 10175 1750 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 8775 1850 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 8525 1850 50  0001 C CNN
+	1    9375 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0141
+U 1 1 5EA7FB30
+P 8275 700
+F 0 "#PWR0141" H 8275 550 50  0001 C CNN
+F 1 "VCC" H 8275 850 50  0000 C CNN
+F 2 "" H 8275 700 50  0001 C CNN
+F 3 "" H 8275 700 50  0001 C CNN
+	1    8275 700 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10375 1750 10475 1750
+$Comp
+L power:GND #PWR0142
+U 1 1 5EA7FB3B
+P 10475 1750
+F 0 "#PWR0142" H 10475 1500 50  0001 C CNN
+F 1 "GND" H 10475 1600 50  0000 C CNN
+F 2 "" H 10475 1750 50  0001 C CNN
+F 3 "" H 10475 1750 50  0001 C CNN
+	1    10475 1750
+	1    0    0    -1  
+$EndComp
+Connection ~ 10475 1750
+Wire Wire Line
+	8275 1750 8275 1950
+Wire Wire Line
+	8375 1750 8375 1950
+Text Label 8275 1950 1    50   ~ 0
+~RD
+Text Label 8375 1950 1    50   ~ 0
+~WR
+Wire Wire Line
+	8625 1750 8625 1950
+Wire Wire Line
+	8725 1750 8725 1950
+Wire Wire Line
+	8825 1750 8825 1950
+Wire Wire Line
+	8925 1750 8925 1950
+Wire Wire Line
+	9025 1750 9025 1950
+Wire Wire Line
+	9125 1750 9125 1950
+Text Label 8625 1950 1    50   ~ 0
+~FL
+Text Label 8725 1950 1    50   ~ 0
+A0
+Text Label 8825 1950 1    50   ~ 0
+A1
+Text Label 8925 1950 1    50   ~ 0
+A2
+Text Label 9025 1950 1    50   ~ 0
+A3
+Text Label 9125 1950 1    50   ~ 0
+A4
+Wire Wire Line
+	9375 1750 9375 1950
+Wire Wire Line
+	9475 1750 9475 1950
+Wire Wire Line
+	9575 1750 9575 1950
+Wire Wire Line
+	9675 1750 9675 1950
+Wire Wire Line
+	9775 1750 9775 1950
+Wire Wire Line
+	9875 1750 9875 1950
+Wire Wire Line
+	9975 1750 9975 1950
+Wire Wire Line
+	10075 1750 10075 1950
+Text Label 9375 1950 1    50   ~ 0
+D0
+Text Label 9475 1950 1    50   ~ 0
+D1
+Text Label 9575 1950 1    50   ~ 0
+D2
+Text Label 9675 1950 1    50   ~ 0
+D3
+Text Label 9775 1950 1    50   ~ 0
+D4
+Text Label 9875 1950 1    50   ~ 0
+D5
+Text Label 9975 1950 1    50   ~ 0
+D6
+Text Label 10075 1950 1    50   ~ 0
+D7
+Wire Wire Line
+	9325 700  9325 625 
+Wire Wire Line
+	9325 625  9025 625 
+Text Label 9025 625  0    50   ~ 0
+~D4EN
+$Comp
+L power:GND #PWR0143
+U 1 1 5EA7FB6B
+P 9825 600
+F 0 "#PWR0143" H 9825 350 50  0001 C CNN
+F 1 "GND" H 9825 450 50  0000 C CNN
+F 2 "" H 9825 600 50  0001 C CNN
+F 3 "" H 9825 600 50  0001 C CNN
+	1    9825 600 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9525 700  9525 625 
+Wire Wire Line
+	9525 625  9750 625 
+Text Label 9750 625  2    50   ~ 0
+DCLK
+Wire Wire Line
+	9825 600  9825 525 
+Wire Wire Line
+	9825 525  9425 525 
+Wire Wire Line
+	9425 525  9425 700 
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D5
+U 1 1 5EA9A11F
+P 1800 2775
+F 0 "D5" H 2400 3275 50  0000 L CNN
+F 1 "PDSP1881" H 2600 3275 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 1200 3375 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 950 3375 50  0001 C CNN
+	1    1800 2775
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0144
+U 1 1 5EA9A129
+P 700 2225
+F 0 "#PWR0144" H 700 2075 50  0001 C CNN
+F 1 "VCC" H 700 2375 50  0000 C CNN
+F 2 "" H 700 2225 50  0001 C CNN
+F 3 "" H 700 2225 50  0001 C CNN
+	1    700  2225
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 3275 2900 3275
+$Comp
+L power:GND #PWR0145
+U 1 1 5EA9A134
+P 2900 3275
+F 0 "#PWR0145" H 2900 3025 50  0001 C CNN
+F 1 "GND" H 2900 3125 50  0000 C CNN
+F 2 "" H 2900 3275 50  0001 C CNN
+F 3 "" H 2900 3275 50  0001 C CNN
+	1    2900 3275
+	1    0    0    -1  
+$EndComp
+Connection ~ 2900 3275
+Wire Wire Line
+	700  3275 700  3475
+Wire Wire Line
+	800  3275 800  3475
+Text Label 700  3475 1    50   ~ 0
+~RD
+Text Label 800  3475 1    50   ~ 0
+~WR
+Wire Wire Line
+	1050 3275 1050 3475
+Wire Wire Line
+	1150 3275 1150 3475
+Wire Wire Line
+	1250 3275 1250 3475
+Wire Wire Line
+	1350 3275 1350 3475
+Wire Wire Line
+	1450 3275 1450 3475
+Wire Wire Line
+	1550 3275 1550 3475
+Text Label 1050 3475 1    50   ~ 0
+~FL
+Text Label 1150 3475 1    50   ~ 0
+A0
+Text Label 1250 3475 1    50   ~ 0
+A1
+Text Label 1350 3475 1    50   ~ 0
+A2
+Text Label 1450 3475 1    50   ~ 0
+A3
+Text Label 1550 3475 1    50   ~ 0
+A4
+Wire Wire Line
+	1800 3275 1800 3475
+Wire Wire Line
+	1900 3275 1900 3475
+Wire Wire Line
+	2000 3275 2000 3475
+Wire Wire Line
+	2100 3275 2100 3475
+Wire Wire Line
+	2200 3275 2200 3475
+Wire Wire Line
+	2300 3275 2300 3475
+Wire Wire Line
+	2400 3275 2400 3475
+Wire Wire Line
+	2500 3275 2500 3475
+Text Label 1800 3475 1    50   ~ 0
+D0
+Text Label 1900 3475 1    50   ~ 0
+D1
+Text Label 2000 3475 1    50   ~ 0
+D2
+Text Label 2100 3475 1    50   ~ 0
+D3
+Text Label 2200 3475 1    50   ~ 0
+D4
+Text Label 2300 3475 1    50   ~ 0
+D5
+Text Label 2400 3475 1    50   ~ 0
+D6
+Text Label 2500 3475 1    50   ~ 0
+D7
+Wire Wire Line
+	1750 2225 1750 2150
+Wire Wire Line
+	1750 2150 1450 2150
+Text Label 1450 2150 0    50   ~ 0
+~D5EN
+Wire Wire Line
+	1950 2225 1950 2150
+Wire Wire Line
+	1950 2150 2175 2150
+Text Label 2175 2150 2    50   ~ 0
+DCLK
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D6
+U 1 1 5EA9A171
+P 4325 2775
+F 0 "D6" H 4925 3275 50  0000 L CNN
+F 1 "PDSP1881" H 5125 3275 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 3725 3375 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 3475 3375 50  0001 C CNN
+	1    4325 2775
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0146
+U 1 1 5EA9A17B
+P 3225 2225
+F 0 "#PWR0146" H 3225 2075 50  0001 C CNN
+F 1 "VCC" H 3225 2375 50  0000 C CNN
+F 2 "" H 3225 2225 50  0001 C CNN
+F 3 "" H 3225 2225 50  0001 C CNN
+	1    3225 2225
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5325 3275 5425 3275
+$Comp
+L power:GND #PWR0147
+U 1 1 5EA9A186
+P 5425 3275
+F 0 "#PWR0147" H 5425 3025 50  0001 C CNN
+F 1 "GND" H 5425 3125 50  0000 C CNN
+F 2 "" H 5425 3275 50  0001 C CNN
+F 3 "" H 5425 3275 50  0001 C CNN
+	1    5425 3275
+	1    0    0    -1  
+$EndComp
+Connection ~ 5425 3275
+Wire Wire Line
+	3225 3275 3225 3475
+Wire Wire Line
+	3325 3275 3325 3475
+Text Label 3225 3475 1    50   ~ 0
+~RD
+Text Label 3325 3475 1    50   ~ 0
+~WR
+Wire Wire Line
+	3575 3275 3575 3475
+Wire Wire Line
+	3675 3275 3675 3475
+Wire Wire Line
+	3775 3275 3775 3475
+Wire Wire Line
+	3875 3275 3875 3475
+Wire Wire Line
+	3975 3275 3975 3475
+Wire Wire Line
+	4075 3275 4075 3475
+Text Label 3575 3475 1    50   ~ 0
+~FL
+Text Label 3675 3475 1    50   ~ 0
+A0
+Text Label 3775 3475 1    50   ~ 0
+A1
+Text Label 3875 3475 1    50   ~ 0
+A2
+Text Label 3975 3475 1    50   ~ 0
+A3
+Text Label 4075 3475 1    50   ~ 0
+A4
+Wire Wire Line
+	4325 3275 4325 3475
+Wire Wire Line
+	4425 3275 4425 3475
+Wire Wire Line
+	4525 3275 4525 3475
+Wire Wire Line
+	4625 3275 4625 3475
+Wire Wire Line
+	4725 3275 4725 3475
+Wire Wire Line
+	4825 3275 4825 3475
+Wire Wire Line
+	4925 3275 4925 3475
+Wire Wire Line
+	5025 3275 5025 3475
+Text Label 4325 3475 1    50   ~ 0
+D0
+Text Label 4425 3475 1    50   ~ 0
+D1
+Text Label 4525 3475 1    50   ~ 0
+D2
+Text Label 4625 3475 1    50   ~ 0
+D3
+Text Label 4725 3475 1    50   ~ 0
+D4
+Text Label 4825 3475 1    50   ~ 0
+D5
+Text Label 4925 3475 1    50   ~ 0
+D6
+Text Label 5025 3475 1    50   ~ 0
+D7
+Wire Wire Line
+	4275 2225 4275 2150
+Wire Wire Line
+	4275 2150 3975 2150
+Text Label 3975 2150 0    50   ~ 0
+~D6EN
+$Comp
+L power:GND #PWR0148
+U 1 1 5EA9A1B6
+P 4775 2125
+F 0 "#PWR0148" H 4775 1875 50  0001 C CNN
+F 1 "GND" H 4775 1975 50  0000 C CNN
+F 2 "" H 4775 2125 50  0001 C CNN
+F 3 "" H 4775 2125 50  0001 C CNN
+	1    4775 2125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4475 2225 4475 2150
+Wire Wire Line
+	4475 2150 4700 2150
+Text Label 4700 2150 2    50   ~ 0
+DCLK
+Wire Wire Line
+	4775 2125 4775 2050
+Wire Wire Line
+	4775 2050 4375 2050
+Wire Wire Line
+	4375 2050 4375 2225
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D7
+U 1 1 5EA9A1C6
+P 6850 2775
+F 0 "D7" H 7450 3275 50  0000 L CNN
+F 1 "PDSP1881" H 7650 3275 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 6250 3375 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 6000 3375 50  0001 C CNN
+	1    6850 2775
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0149
+U 1 1 5EA9A1D0
+P 5750 2225
+F 0 "#PWR0149" H 5750 2075 50  0001 C CNN
+F 1 "VCC" H 5750 2375 50  0000 C CNN
+F 2 "" H 5750 2225 50  0001 C CNN
+F 3 "" H 5750 2225 50  0001 C CNN
+	1    5750 2225
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7850 3275 7950 3275
+$Comp
+L power:GND #PWR0150
+U 1 1 5EA9A1DB
+P 7950 3275
+F 0 "#PWR0150" H 7950 3025 50  0001 C CNN
+F 1 "GND" H 7950 3125 50  0000 C CNN
+F 2 "" H 7950 3275 50  0001 C CNN
+F 3 "" H 7950 3275 50  0001 C CNN
+	1    7950 3275
+	1    0    0    -1  
+$EndComp
+Connection ~ 7950 3275
+Wire Wire Line
+	5750 3275 5750 3475
+Wire Wire Line
+	5850 3275 5850 3475
+Text Label 5750 3475 1    50   ~ 0
+~RD
+Text Label 5850 3475 1    50   ~ 0
+~WR
+Wire Wire Line
+	6100 3275 6100 3475
+Wire Wire Line
+	6200 3275 6200 3475
+Wire Wire Line
+	6300 3275 6300 3475
+Wire Wire Line
+	6400 3275 6400 3475
+Wire Wire Line
+	6500 3275 6500 3475
+Wire Wire Line
+	6600 3275 6600 3475
+Text Label 6100 3475 1    50   ~ 0
+~FL
+Text Label 6200 3475 1    50   ~ 0
+A0
+Text Label 6300 3475 1    50   ~ 0
+A1
+Text Label 6400 3475 1    50   ~ 0
+A2
+Text Label 6500 3475 1    50   ~ 0
+A3
+Text Label 6600 3475 1    50   ~ 0
+A4
+Wire Wire Line
+	6850 3275 6850 3475
+Wire Wire Line
+	6950 3275 6950 3475
+Wire Wire Line
+	7050 3275 7050 3475
+Wire Wire Line
+	7150 3275 7150 3475
+Wire Wire Line
+	7250 3275 7250 3475
+Wire Wire Line
+	7350 3275 7350 3475
+Wire Wire Line
+	7450 3275 7450 3475
+Wire Wire Line
+	7550 3275 7550 3475
+Text Label 6850 3475 1    50   ~ 0
+D0
+Text Label 6950 3475 1    50   ~ 0
+D1
+Text Label 7050 3475 1    50   ~ 0
+D2
+Text Label 7150 3475 1    50   ~ 0
+D3
+Text Label 7250 3475 1    50   ~ 0
+D4
+Text Label 7350 3475 1    50   ~ 0
+D5
+Text Label 7450 3475 1    50   ~ 0
+D6
+Text Label 7550 3475 1    50   ~ 0
+D7
+Wire Wire Line
+	6800 2225 6800 2150
+Wire Wire Line
+	6800 2150 6500 2150
+Text Label 6500 2150 0    50   ~ 0
+~D7EN
+$Comp
+L power:GND #PWR0151
+U 1 1 5EA9A20B
+P 7300 2125
+F 0 "#PWR0151" H 7300 1875 50  0001 C CNN
+F 1 "GND" H 7300 1975 50  0000 C CNN
+F 2 "" H 7300 2125 50  0001 C CNN
+F 3 "" H 7300 2125 50  0001 C CNN
+	1    7300 2125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 2225 7000 2150
+Wire Wire Line
+	7000 2150 7225 2150
+Text Label 7225 2150 2    50   ~ 0
+DCLK
+Wire Wire Line
+	7300 2125 7300 2050
+Wire Wire Line
+	7300 2050 6900 2050
+Wire Wire Line
+	6900 2050 6900 2225
+$Comp
+L power:VCC #PWR0152
+U 1 1 5EA9A225
+P 8275 2225
+F 0 "#PWR0152" H 8275 2075 50  0001 C CNN
+F 1 "VCC" H 8275 2375 50  0000 C CNN
+F 2 "" H 8275 2225 50  0001 C CNN
+F 3 "" H 8275 2225 50  0001 C CNN
+	1    8275 2225
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10375 3275 10475 3275
+$Comp
+L power:GND #PWR0153
+U 1 1 5EA9A230
+P 10475 3275
+F 0 "#PWR0153" H 10475 3025 50  0001 C CNN
+F 1 "GND" H 10475 3125 50  0000 C CNN
+F 2 "" H 10475 3275 50  0001 C CNN
+F 3 "" H 10475 3275 50  0001 C CNN
+	1    10475 3275
+	1    0    0    -1  
+$EndComp
+Connection ~ 10475 3275
+Wire Wire Line
+	8275 3275 8275 3475
+Wire Wire Line
+	8375 3275 8375 3475
+Text Label 8275 3475 1    50   ~ 0
+~RD
+Text Label 8375 3475 1    50   ~ 0
+~WR
+Wire Wire Line
+	8625 3275 8625 3475
+Wire Wire Line
+	8725 3275 8725 3475
+Wire Wire Line
+	8825 3275 8825 3475
+Wire Wire Line
+	8925 3275 8925 3475
+Wire Wire Line
+	9025 3275 9025 3475
+Wire Wire Line
+	9125 3275 9125 3475
+Text Label 8625 3475 1    50   ~ 0
+~FL
+Text Label 8725 3475 1    50   ~ 0
+A0
+Text Label 8825 3475 1    50   ~ 0
+A1
+Text Label 8925 3475 1    50   ~ 0
+A2
+Text Label 9025 3475 1    50   ~ 0
+A3
+Text Label 9125 3475 1    50   ~ 0
+A4
+Wire Wire Line
+	9375 3275 9375 3475
+Wire Wire Line
+	9475 3275 9475 3475
+Wire Wire Line
+	9575 3275 9575 3475
+Wire Wire Line
+	9675 3275 9675 3475
+Wire Wire Line
+	9775 3275 9775 3475
+Wire Wire Line
+	9875 3275 9875 3475
+Wire Wire Line
+	9975 3275 9975 3475
+Wire Wire Line
+	10075 3275 10075 3475
+Text Label 9375 3475 1    50   ~ 0
+D0
+Text Label 9475 3475 1    50   ~ 0
+D1
+Text Label 9575 3475 1    50   ~ 0
+D2
+Text Label 9675 3475 1    50   ~ 0
+D3
+Text Label 9775 3475 1    50   ~ 0
+D4
+Text Label 9875 3475 1    50   ~ 0
+D5
+Text Label 9975 3475 1    50   ~ 0
+D6
+Text Label 10075 3475 1    50   ~ 0
+D7
+Wire Wire Line
+	9325 2225 9325 2150
+Wire Wire Line
+	9325 2150 9025 2150
+Text Label 9025 2150 0    50   ~ 0
+~D8EN
+$Comp
+L power:GND #PWR0154
+U 1 1 5EA9A260
+P 9825 2125
+F 0 "#PWR0154" H 9825 1875 50  0001 C CNN
+F 1 "GND" H 9825 1975 50  0000 C CNN
+F 2 "" H 9825 2125 50  0001 C CNN
+F 3 "" H 9825 2125 50  0001 C CNN
+	1    9825 2125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9525 2225 9525 2150
+Wire Wire Line
+	9525 2150 9750 2150
+Text Label 9750 2150 2    50   ~ 0
+DCLK
+Wire Wire Line
+	9825 2125 9825 2050
+Wire Wire Line
+	9825 2050 9425 2050
+Wire Wire Line
+	9425 2050 9425 2225
+$Comp
+L power:GND #PWR0155
+U 1 1 5EAF69AF
+P 2250 2125
+F 0 "#PWR0155" H 2250 1875 50  0001 C CNN
+F 1 "GND" H 2250 1975 50  0000 C CNN
+F 2 "" H 2250 2125 50  0001 C CNN
+F 3 "" H 2250 2125 50  0001 C CNN
+	1    2250 2125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 2125 2250 2050
+Wire Wire Line
+	2250 2050 1850 2050
+Wire Wire Line
+	1850 2050 1850 2225
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D8
+U 1 1 5EA9A21B
+P 9375 2775
+F 0 "D8" H 9975 3275 50  0000 L CNN
+F 1 "PDSP1881" H 10175 3275 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 8775 3375 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 8525 3375 50  0001 C CNN
+	1    9375 2775
+	1    0    0    -1  
+$EndComp
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D9
+U 1 1 5EB0BECC
+P 1800 4275
+F 0 "D9" H 2400 4775 50  0000 L CNN
+F 1 "PDSP1881" H 2600 4775 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 1200 4875 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 950 4875 50  0001 C CNN
+	1    1800 4275
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0156
+U 1 1 5EB0BED6
+P 700 3725
+F 0 "#PWR0156" H 700 3575 50  0001 C CNN
+F 1 "VCC" H 700 3875 50  0000 C CNN
+F 2 "" H 700 3725 50  0001 C CNN
+F 3 "" H 700 3725 50  0001 C CNN
+	1    700  3725
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 4775 2900 4775
+$Comp
+L power:GND #PWR0157
+U 1 1 5EB0BEE1
+P 2900 4775
+F 0 "#PWR0157" H 2900 4525 50  0001 C CNN
+F 1 "GND" H 2900 4625 50  0000 C CNN
+F 2 "" H 2900 4775 50  0001 C CNN
+F 3 "" H 2900 4775 50  0001 C CNN
+	1    2900 4775
+	1    0    0    -1  
+$EndComp
+Connection ~ 2900 4775
+Wire Wire Line
+	700  4775 700  4975
+Wire Wire Line
+	800  4775 800  4975
+Text Label 700  4975 1    50   ~ 0
+~RD
+Text Label 800  4975 1    50   ~ 0
+~WR
+Wire Wire Line
+	1050 4775 1050 4975
+Wire Wire Line
+	1150 4775 1150 4975
+Wire Wire Line
+	1250 4775 1250 4975
+Wire Wire Line
+	1350 4775 1350 4975
+Wire Wire Line
+	1450 4775 1450 4975
+Wire Wire Line
+	1550 4775 1550 4975
+Text Label 1050 4975 1    50   ~ 0
+~FL
+Text Label 1150 4975 1    50   ~ 0
+A0
+Text Label 1250 4975 1    50   ~ 0
+A1
+Text Label 1350 4975 1    50   ~ 0
+A2
+Text Label 1450 4975 1    50   ~ 0
+A3
+Text Label 1550 4975 1    50   ~ 0
+A4
+Wire Wire Line
+	1800 4775 1800 4975
+Wire Wire Line
+	1900 4775 1900 4975
+Wire Wire Line
+	2000 4775 2000 4975
+Wire Wire Line
+	2100 4775 2100 4975
+Wire Wire Line
+	2200 4775 2200 4975
+Wire Wire Line
+	2300 4775 2300 4975
+Wire Wire Line
+	2400 4775 2400 4975
+Wire Wire Line
+	2500 4775 2500 4975
+Text Label 1800 4975 1    50   ~ 0
+D0
+Text Label 1900 4975 1    50   ~ 0
+D1
+Text Label 2000 4975 1    50   ~ 0
+D2
+Text Label 2100 4975 1    50   ~ 0
+D3
+Text Label 2200 4975 1    50   ~ 0
+D4
+Text Label 2300 4975 1    50   ~ 0
+D5
+Text Label 2400 4975 1    50   ~ 0
+D6
+Text Label 2500 4975 1    50   ~ 0
+D7
+Wire Wire Line
+	1750 3725 1750 3650
+Wire Wire Line
+	1750 3650 1450 3650
+Text Label 1450 3650 0    50   ~ 0
+~D9EN
+Wire Wire Line
+	1950 3725 1950 3650
+Wire Wire Line
+	1950 3650 2175 3650
+Text Label 2175 3650 2    50   ~ 0
+DCLK
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D10
+U 1 1 5EB0BF14
+P 4325 4275
+F 0 "D10" H 4925 4775 50  0000 L CNN
+F 1 "PDSP1881" H 5125 4775 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 3725 4875 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 3475 4875 50  0001 C CNN
+	1    4325 4275
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0158
+U 1 1 5EB0BF1E
+P 3225 3725
+F 0 "#PWR0158" H 3225 3575 50  0001 C CNN
+F 1 "VCC" H 3225 3875 50  0000 C CNN
+F 2 "" H 3225 3725 50  0001 C CNN
+F 3 "" H 3225 3725 50  0001 C CNN
+	1    3225 3725
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5325 4775 5425 4775
+$Comp
+L power:GND #PWR0159
+U 1 1 5EB0BF29
+P 5425 4775
+F 0 "#PWR0159" H 5425 4525 50  0001 C CNN
+F 1 "GND" H 5425 4625 50  0000 C CNN
+F 2 "" H 5425 4775 50  0001 C CNN
+F 3 "" H 5425 4775 50  0001 C CNN
+	1    5425 4775
+	1    0    0    -1  
+$EndComp
+Connection ~ 5425 4775
+Wire Wire Line
+	3225 4775 3225 4975
+Wire Wire Line
+	3325 4775 3325 4975
+Text Label 3225 4975 1    50   ~ 0
+~RD
+Text Label 3325 4975 1    50   ~ 0
+~WR
+Wire Wire Line
+	3575 4775 3575 4975
+Wire Wire Line
+	3675 4775 3675 4975
+Wire Wire Line
+	3775 4775 3775 4975
+Wire Wire Line
+	3875 4775 3875 4975
+Wire Wire Line
+	3975 4775 3975 4975
+Wire Wire Line
+	4075 4775 4075 4975
+Text Label 3575 4975 1    50   ~ 0
+~FL
+Text Label 3675 4975 1    50   ~ 0
+A0
+Text Label 3775 4975 1    50   ~ 0
+A1
+Text Label 3875 4975 1    50   ~ 0
+A2
+Text Label 3975 4975 1    50   ~ 0
+A3
+Text Label 4075 4975 1    50   ~ 0
+A4
+Wire Wire Line
+	4325 4775 4325 4975
+Wire Wire Line
+	4425 4775 4425 4975
+Wire Wire Line
+	4525 4775 4525 4975
+Wire Wire Line
+	4625 4775 4625 4975
+Wire Wire Line
+	4725 4775 4725 4975
+Wire Wire Line
+	4825 4775 4825 4975
+Wire Wire Line
+	4925 4775 4925 4975
+Wire Wire Line
+	5025 4775 5025 4975
+Text Label 4325 4975 1    50   ~ 0
+D0
+Text Label 4425 4975 1    50   ~ 0
+D1
+Text Label 4525 4975 1    50   ~ 0
+D2
+Text Label 4625 4975 1    50   ~ 0
+D3
+Text Label 4725 4975 1    50   ~ 0
+D4
+Text Label 4825 4975 1    50   ~ 0
+D5
+Text Label 4925 4975 1    50   ~ 0
+D6
+Text Label 5025 4975 1    50   ~ 0
+D7
+Wire Wire Line
+	4275 3725 4275 3650
+Wire Wire Line
+	4275 3650 3975 3650
+Text Label 3975 3650 0    50   ~ 0
+~D10EN
+$Comp
+L power:GND #PWR0160
+U 1 1 5EB0BF59
+P 4775 3625
+F 0 "#PWR0160" H 4775 3375 50  0001 C CNN
+F 1 "GND" H 4775 3475 50  0000 C CNN
+F 2 "" H 4775 3625 50  0001 C CNN
+F 3 "" H 4775 3625 50  0001 C CNN
+	1    4775 3625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4475 3725 4475 3650
+Wire Wire Line
+	4475 3650 4700 3650
+Text Label 4700 3650 2    50   ~ 0
+DCLK
+Wire Wire Line
+	4775 3625 4775 3550
+Wire Wire Line
+	4775 3550 4375 3550
+Wire Wire Line
+	4375 3550 4375 3725
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D11
+U 1 1 5EB0BF69
+P 6850 4275
+F 0 "D11" H 7450 4775 50  0000 L CNN
+F 1 "PDSP1881" H 7650 4775 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 6250 4875 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 6000 4875 50  0001 C CNN
+	1    6850 4275
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0161
+U 1 1 5EB0BF73
+P 5750 3725
+F 0 "#PWR0161" H 5750 3575 50  0001 C CNN
+F 1 "VCC" H 5750 3875 50  0000 C CNN
+F 2 "" H 5750 3725 50  0001 C CNN
+F 3 "" H 5750 3725 50  0001 C CNN
+	1    5750 3725
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7850 4775 7950 4775
+$Comp
+L power:GND #PWR0162
+U 1 1 5EB0BF7E
+P 7950 4775
+F 0 "#PWR0162" H 7950 4525 50  0001 C CNN
+F 1 "GND" H 7950 4625 50  0000 C CNN
+F 2 "" H 7950 4775 50  0001 C CNN
+F 3 "" H 7950 4775 50  0001 C CNN
+	1    7950 4775
+	1    0    0    -1  
+$EndComp
+Connection ~ 7950 4775
+Wire Wire Line
+	5750 4775 5750 4975
+Wire Wire Line
+	5850 4775 5850 4975
+Text Label 5750 4975 1    50   ~ 0
+~RD
+Text Label 5850 4975 1    50   ~ 0
+~WR
+Wire Wire Line
+	6100 4775 6100 4975
+Wire Wire Line
+	6200 4775 6200 4975
+Wire Wire Line
+	6300 4775 6300 4975
+Wire Wire Line
+	6400 4775 6400 4975
+Wire Wire Line
+	6500 4775 6500 4975
+Wire Wire Line
+	6600 4775 6600 4975
+Text Label 6100 4975 1    50   ~ 0
+~FL
+Text Label 6200 4975 1    50   ~ 0
+A0
+Text Label 6300 4975 1    50   ~ 0
+A1
+Text Label 6400 4975 1    50   ~ 0
+A2
+Text Label 6500 4975 1    50   ~ 0
+A3
+Text Label 6600 4975 1    50   ~ 0
+A4
+Wire Wire Line
+	6850 4775 6850 4975
+Wire Wire Line
+	6950 4775 6950 4975
+Wire Wire Line
+	7050 4775 7050 4975
+Wire Wire Line
+	7150 4775 7150 4975
+Wire Wire Line
+	7250 4775 7250 4975
+Wire Wire Line
+	7350 4775 7350 4975
+Wire Wire Line
+	7450 4775 7450 4975
+Wire Wire Line
+	7550 4775 7550 4975
+Text Label 6850 4975 1    50   ~ 0
+D0
+Text Label 6950 4975 1    50   ~ 0
+D1
+Text Label 7050 4975 1    50   ~ 0
+D2
+Text Label 7150 4975 1    50   ~ 0
+D3
+Text Label 7250 4975 1    50   ~ 0
+D4
+Text Label 7350 4975 1    50   ~ 0
+D5
+Text Label 7450 4975 1    50   ~ 0
+D6
+Text Label 7550 4975 1    50   ~ 0
+D7
+Wire Wire Line
+	6800 3725 6800 3650
+Wire Wire Line
+	6800 3650 6500 3650
+Text Label 6500 3650 0    50   ~ 0
+~D11EN
+$Comp
+L power:GND #PWR0163
+U 1 1 5EB0BFAE
+P 7300 3625
+F 0 "#PWR0163" H 7300 3375 50  0001 C CNN
+F 1 "GND" H 7300 3475 50  0000 C CNN
+F 2 "" H 7300 3625 50  0001 C CNN
+F 3 "" H 7300 3625 50  0001 C CNN
+	1    7300 3625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 3725 7000 3650
+Wire Wire Line
+	7000 3650 7225 3650
+Text Label 7225 3650 2    50   ~ 0
+DCLK
+Wire Wire Line
+	7300 3625 7300 3550
+Wire Wire Line
+	7300 3550 6900 3550
+Wire Wire Line
+	6900 3550 6900 3725
+$Comp
+L power:VCC #PWR0164
+U 1 1 5EB0BFBE
+P 8275 3725
+F 0 "#PWR0164" H 8275 3575 50  0001 C CNN
+F 1 "VCC" H 8275 3875 50  0000 C CNN
+F 2 "" H 8275 3725 50  0001 C CNN
+F 3 "" H 8275 3725 50  0001 C CNN
+	1    8275 3725
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10375 4775 10475 4775
+$Comp
+L power:GND #PWR0165
+U 1 1 5EB0BFC9
+P 10475 4775
+F 0 "#PWR0165" H 10475 4525 50  0001 C CNN
+F 1 "GND" H 10475 4625 50  0000 C CNN
+F 2 "" H 10475 4775 50  0001 C CNN
+F 3 "" H 10475 4775 50  0001 C CNN
+	1    10475 4775
+	1    0    0    -1  
+$EndComp
+Connection ~ 10475 4775
+Wire Wire Line
+	8275 4775 8275 4975
+Wire Wire Line
+	8375 4775 8375 4975
+Text Label 8275 4975 1    50   ~ 0
+~RD
+Text Label 8375 4975 1    50   ~ 0
+~WR
+Wire Wire Line
+	8625 4775 8625 4975
+Wire Wire Line
+	8725 4775 8725 4975
+Wire Wire Line
+	8825 4775 8825 4975
+Wire Wire Line
+	8925 4775 8925 4975
+Wire Wire Line
+	9025 4775 9025 4975
+Wire Wire Line
+	9125 4775 9125 4975
+Text Label 8625 4975 1    50   ~ 0
+~FL
+Text Label 8725 4975 1    50   ~ 0
+A0
+Text Label 8825 4975 1    50   ~ 0
+A1
+Text Label 8925 4975 1    50   ~ 0
+A2
+Text Label 9025 4975 1    50   ~ 0
+A3
+Text Label 9125 4975 1    50   ~ 0
+A4
+Wire Wire Line
+	9375 4775 9375 4975
+Wire Wire Line
+	9475 4775 9475 4975
+Wire Wire Line
+	9575 4775 9575 4975
+Wire Wire Line
+	9675 4775 9675 4975
+Wire Wire Line
+	9775 4775 9775 4975
+Wire Wire Line
+	9875 4775 9875 4975
+Wire Wire Line
+	9975 4775 9975 4975
+Wire Wire Line
+	10075 4775 10075 4975
+Text Label 9375 4975 1    50   ~ 0
+D0
+Text Label 9475 4975 1    50   ~ 0
+D1
+Text Label 9575 4975 1    50   ~ 0
+D2
+Text Label 9675 4975 1    50   ~ 0
+D3
+Text Label 9775 4975 1    50   ~ 0
+D4
+Text Label 9875 4975 1    50   ~ 0
+D5
+Text Label 9975 4975 1    50   ~ 0
+D6
+Text Label 10075 4975 1    50   ~ 0
+D7
+Wire Wire Line
+	9325 3725 9325 3650
+Wire Wire Line
+	9325 3650 9025 3650
+Text Label 9025 3650 0    50   ~ 0
+~D12EN
+$Comp
+L power:GND #PWR0166
+U 1 1 5EB0BFF9
+P 9825 3625
+F 0 "#PWR0166" H 9825 3375 50  0001 C CNN
+F 1 "GND" H 9825 3475 50  0000 C CNN
+F 2 "" H 9825 3625 50  0001 C CNN
+F 3 "" H 9825 3625 50  0001 C CNN
+	1    9825 3625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9525 3725 9525 3650
+Wire Wire Line
+	9525 3650 9750 3650
+Text Label 9750 3650 2    50   ~ 0
+DCLK
+Wire Wire Line
+	9825 3625 9825 3550
+Wire Wire Line
+	9825 3550 9425 3550
+Wire Wire Line
+	9425 3550 9425 3725
+$Comp
+L power:GND #PWR0167
+U 1 1 5EB0C009
+P 2250 3625
+F 0 "#PWR0167" H 2250 3375 50  0001 C CNN
+F 1 "GND" H 2250 3475 50  0000 C CNN
+F 2 "" H 2250 3625 50  0001 C CNN
+F 3 "" H 2250 3625 50  0001 C CNN
+	1    2250 3625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 3625 2250 3550
+Wire Wire Line
+	2250 3550 1850 3550
+Wire Wire Line
+	1850 3550 1850 3725
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D12
+U 1 1 5EB0C016
+P 9375 4275
+F 0 "D12" H 9975 4775 50  0000 L CNN
+F 1 "PDSP1881" H 10175 4775 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 8775 4875 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 8525 4875 50  0001 C CNN
+	1    9375 4275
+	1    0    0    -1  
+$EndComp
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D13
+U 1 1 5EBA361E
+P 1800 5800
+F 0 "D13" H 2400 6300 50  0000 L CNN
+F 1 "PDSP1881" H 2600 6300 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 1200 6400 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 950 6400 50  0001 C CNN
+	1    1800 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0168
+U 1 1 5EBA3628
+P 700 5250
+F 0 "#PWR0168" H 700 5100 50  0001 C CNN
+F 1 "VCC" H 700 5400 50  0000 C CNN
+F 2 "" H 700 5250 50  0001 C CNN
+F 3 "" H 700 5250 50  0001 C CNN
+	1    700  5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 6300 2900 6300
+$Comp
+L power:GND #PWR0169
+U 1 1 5EBA3633
+P 2900 6300
+F 0 "#PWR0169" H 2900 6050 50  0001 C CNN
+F 1 "GND" H 2900 6150 50  0000 C CNN
+F 2 "" H 2900 6300 50  0001 C CNN
+F 3 "" H 2900 6300 50  0001 C CNN
+	1    2900 6300
+	1    0    0    -1  
+$EndComp
+Connection ~ 2900 6300
+Wire Wire Line
+	700  6300 700  6500
+Wire Wire Line
+	800  6300 800  6500
+Text Label 700  6500 1    50   ~ 0
+~RD
+Text Label 800  6500 1    50   ~ 0
+~WR
+Wire Wire Line
+	1050 6300 1050 6500
+Wire Wire Line
+	1150 6300 1150 6500
+Wire Wire Line
+	1250 6300 1250 6500
+Wire Wire Line
+	1350 6300 1350 6500
+Wire Wire Line
+	1450 6300 1450 6500
+Wire Wire Line
+	1550 6300 1550 6500
+Text Label 1050 6500 1    50   ~ 0
+~FL
+Text Label 1150 6500 1    50   ~ 0
+A0
+Text Label 1250 6500 1    50   ~ 0
+A1
+Text Label 1350 6500 1    50   ~ 0
+A2
+Text Label 1450 6500 1    50   ~ 0
+A3
+Text Label 1550 6500 1    50   ~ 0
+A4
+Wire Wire Line
+	1800 6300 1800 6500
+Wire Wire Line
+	1900 6300 1900 6500
+Wire Wire Line
+	2000 6300 2000 6500
+Wire Wire Line
+	2100 6300 2100 6500
+Wire Wire Line
+	2200 6300 2200 6500
+Wire Wire Line
+	2300 6300 2300 6500
+Wire Wire Line
+	2400 6300 2400 6500
+Wire Wire Line
+	2500 6300 2500 6500
+Text Label 1800 6500 1    50   ~ 0
+D0
+Text Label 1900 6500 1    50   ~ 0
+D1
+Text Label 2000 6500 1    50   ~ 0
+D2
+Text Label 2100 6500 1    50   ~ 0
+D3
+Text Label 2200 6500 1    50   ~ 0
+D4
+Text Label 2300 6500 1    50   ~ 0
+D5
+Text Label 2400 6500 1    50   ~ 0
+D6
+Text Label 2500 6500 1    50   ~ 0
+D7
+Wire Wire Line
+	1750 5250 1750 5175
+Wire Wire Line
+	1750 5175 1450 5175
+Text Label 1450 5175 0    50   ~ 0
+~D13EN
+Wire Wire Line
+	1950 5250 1950 5175
+Wire Wire Line
+	1950 5175 2175 5175
+Text Label 2175 5175 2    50   ~ 0
+DCLK
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D14
+U 1 1 5EBA3666
+P 4325 5800
+F 0 "D14" H 4925 6300 50  0000 L CNN
+F 1 "PDSP1881" H 5125 6300 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 3725 6400 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 3475 6400 50  0001 C CNN
+	1    4325 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0170
+U 1 1 5EBA3670
+P 3225 5250
+F 0 "#PWR0170" H 3225 5100 50  0001 C CNN
+F 1 "VCC" H 3225 5400 50  0000 C CNN
+F 2 "" H 3225 5250 50  0001 C CNN
+F 3 "" H 3225 5250 50  0001 C CNN
+	1    3225 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5325 6300 5425 6300
+$Comp
+L power:GND #PWR0171
+U 1 1 5EBA367B
+P 5425 6300
+F 0 "#PWR0171" H 5425 6050 50  0001 C CNN
+F 1 "GND" H 5425 6150 50  0000 C CNN
+F 2 "" H 5425 6300 50  0001 C CNN
+F 3 "" H 5425 6300 50  0001 C CNN
+	1    5425 6300
+	1    0    0    -1  
+$EndComp
+Connection ~ 5425 6300
+Wire Wire Line
+	3225 6300 3225 6500
+Wire Wire Line
+	3325 6300 3325 6500
+Text Label 3225 6500 1    50   ~ 0
+~RD
+Text Label 3325 6500 1    50   ~ 0
+~WR
+Wire Wire Line
+	3575 6300 3575 6500
+Wire Wire Line
+	3675 6300 3675 6500
+Wire Wire Line
+	3775 6300 3775 6500
+Wire Wire Line
+	3875 6300 3875 6500
+Wire Wire Line
+	3975 6300 3975 6500
+Wire Wire Line
+	4075 6300 4075 6500
+Text Label 3575 6500 1    50   ~ 0
+~FL
+Text Label 3675 6500 1    50   ~ 0
+A0
+Text Label 3775 6500 1    50   ~ 0
+A1
+Text Label 3875 6500 1    50   ~ 0
+A2
+Text Label 3975 6500 1    50   ~ 0
+A3
+Text Label 4075 6500 1    50   ~ 0
+A4
+Wire Wire Line
+	4325 6300 4325 6500
+Wire Wire Line
+	4425 6300 4425 6500
+Wire Wire Line
+	4525 6300 4525 6500
+Wire Wire Line
+	4625 6300 4625 6500
+Wire Wire Line
+	4725 6300 4725 6500
+Wire Wire Line
+	4825 6300 4825 6500
+Wire Wire Line
+	4925 6300 4925 6500
+Wire Wire Line
+	5025 6300 5025 6500
+Text Label 4325 6500 1    50   ~ 0
+D0
+Text Label 4425 6500 1    50   ~ 0
+D1
+Text Label 4525 6500 1    50   ~ 0
+D2
+Text Label 4625 6500 1    50   ~ 0
+D3
+Text Label 4725 6500 1    50   ~ 0
+D4
+Text Label 4825 6500 1    50   ~ 0
+D5
+Text Label 4925 6500 1    50   ~ 0
+D6
+Text Label 5025 6500 1    50   ~ 0
+D7
+Wire Wire Line
+	4275 5250 4275 5175
+Wire Wire Line
+	4275 5175 3975 5175
+Text Label 3975 5175 0    50   ~ 0
+~D14EN
+$Comp
+L power:GND #PWR0172
+U 1 1 5EBA36AB
+P 4775 5150
+F 0 "#PWR0172" H 4775 4900 50  0001 C CNN
+F 1 "GND" H 4775 5000 50  0000 C CNN
+F 2 "" H 4775 5150 50  0001 C CNN
+F 3 "" H 4775 5150 50  0001 C CNN
+	1    4775 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4475 5250 4475 5175
+Wire Wire Line
+	4475 5175 4700 5175
+Text Label 4700 5175 2    50   ~ 0
+DCLK
+Wire Wire Line
+	4775 5150 4775 5075
+Wire Wire Line
+	4775 5075 4375 5075
+Wire Wire Line
+	4375 5075 4375 5250
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D15
+U 1 1 5EBA36BB
+P 6850 5800
+F 0 "D15" H 7450 6300 50  0000 L CNN
+F 1 "PDSP1881" H 7650 6300 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 6250 6400 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 6000 6400 50  0001 C CNN
+	1    6850 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0173
+U 1 1 5EBA36C5
+P 5750 5250
+F 0 "#PWR0173" H 5750 5100 50  0001 C CNN
+F 1 "VCC" H 5750 5400 50  0000 C CNN
+F 2 "" H 5750 5250 50  0001 C CNN
+F 3 "" H 5750 5250 50  0001 C CNN
+	1    5750 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7850 6300 7950 6300
+$Comp
+L power:GND #PWR0174
+U 1 1 5EBA36D0
+P 7950 6300
+F 0 "#PWR0174" H 7950 6050 50  0001 C CNN
+F 1 "GND" H 7950 6150 50  0000 C CNN
+F 2 "" H 7950 6300 50  0001 C CNN
+F 3 "" H 7950 6300 50  0001 C CNN
+	1    7950 6300
+	1    0    0    -1  
+$EndComp
+Connection ~ 7950 6300
+Wire Wire Line
+	5750 6300 5750 6500
+Wire Wire Line
+	5850 6300 5850 6500
+Text Label 5750 6500 1    50   ~ 0
+~RD
+Text Label 5850 6500 1    50   ~ 0
+~WR
+Wire Wire Line
+	6100 6300 6100 6500
+Wire Wire Line
+	6200 6300 6200 6500
+Wire Wire Line
+	6300 6300 6300 6500
+Wire Wire Line
+	6400 6300 6400 6500
+Wire Wire Line
+	6500 6300 6500 6500
+Wire Wire Line
+	6600 6300 6600 6500
+Text Label 6100 6500 1    50   ~ 0
+~FL
+Text Label 6200 6500 1    50   ~ 0
+A0
+Text Label 6300 6500 1    50   ~ 0
+A1
+Text Label 6400 6500 1    50   ~ 0
+A2
+Text Label 6500 6500 1    50   ~ 0
+A3
+Text Label 6600 6500 1    50   ~ 0
+A4
+Wire Wire Line
+	6850 6300 6850 6500
+Wire Wire Line
+	6950 6300 6950 6500
+Wire Wire Line
+	7050 6300 7050 6500
+Wire Wire Line
+	7150 6300 7150 6500
+Wire Wire Line
+	7250 6300 7250 6500
+Wire Wire Line
+	7350 6300 7350 6500
+Wire Wire Line
+	7450 6300 7450 6500
+Wire Wire Line
+	7550 6300 7550 6500
+Text Label 6850 6500 1    50   ~ 0
+D0
+Text Label 6950 6500 1    50   ~ 0
+D1
+Text Label 7050 6500 1    50   ~ 0
+D2
+Text Label 7150 6500 1    50   ~ 0
+D3
+Text Label 7250 6500 1    50   ~ 0
+D4
+Text Label 7350 6500 1    50   ~ 0
+D5
+Text Label 7450 6500 1    50   ~ 0
+D6
+Text Label 7550 6500 1    50   ~ 0
+D7
+Wire Wire Line
+	6800 5250 6800 5175
+Wire Wire Line
+	6800 5175 6500 5175
+Text Label 6500 5175 0    50   ~ 0
+~D15EN
+$Comp
+L power:GND #PWR0175
+U 1 1 5EBA3700
+P 7300 5150
+F 0 "#PWR0175" H 7300 4900 50  0001 C CNN
+F 1 "GND" H 7300 5000 50  0000 C CNN
+F 2 "" H 7300 5150 50  0001 C CNN
+F 3 "" H 7300 5150 50  0001 C CNN
+	1    7300 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 5250 7000 5175
+Wire Wire Line
+	7000 5175 7225 5175
+Text Label 7225 5175 2    50   ~ 0
+DCLK
+Wire Wire Line
+	7300 5150 7300 5075
+Wire Wire Line
+	7300 5075 6900 5075
+Wire Wire Line
+	6900 5075 6900 5250
+$Comp
+L power:VCC #PWR0176
+U 1 1 5EBA3710
+P 8275 5250
+F 0 "#PWR0176" H 8275 5100 50  0001 C CNN
+F 1 "VCC" H 8275 5400 50  0000 C CNN
+F 2 "" H 8275 5250 50  0001 C CNN
+F 3 "" H 8275 5250 50  0001 C CNN
+	1    8275 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10375 6300 10475 6300
+$Comp
+L power:GND #PWR0177
+U 1 1 5EBA371B
+P 10475 6300
+F 0 "#PWR0177" H 10475 6050 50  0001 C CNN
+F 1 "GND" H 10475 6150 50  0000 C CNN
+F 2 "" H 10475 6300 50  0001 C CNN
+F 3 "" H 10475 6300 50  0001 C CNN
+	1    10475 6300
+	1    0    0    -1  
+$EndComp
+Connection ~ 10475 6300
+Wire Wire Line
+	8275 6300 8275 6500
+Wire Wire Line
+	8375 6300 8375 6500
+Text Label 8275 6500 1    50   ~ 0
+~RD
+Text Label 8375 6500 1    50   ~ 0
+~WR
+Wire Wire Line
+	8625 6300 8625 6500
+Wire Wire Line
+	8725 6300 8725 6500
+Wire Wire Line
+	8825 6300 8825 6500
+Wire Wire Line
+	8925 6300 8925 6500
+Wire Wire Line
+	9025 6300 9025 6500
+Wire Wire Line
+	9125 6300 9125 6500
+Text Label 8625 6500 1    50   ~ 0
+~FL
+Text Label 8725 6500 1    50   ~ 0
+A0
+Text Label 8825 6500 1    50   ~ 0
+A1
+Text Label 8925 6500 1    50   ~ 0
+A2
+Text Label 9025 6500 1    50   ~ 0
+A3
+Text Label 9125 6500 1    50   ~ 0
+A4
+Wire Wire Line
+	9375 6300 9375 6500
+Wire Wire Line
+	9475 6300 9475 6500
+Wire Wire Line
+	9575 6300 9575 6500
+Wire Wire Line
+	9675 6300 9675 6500
+Wire Wire Line
+	9775 6300 9775 6500
+Wire Wire Line
+	9875 6300 9875 6500
+Wire Wire Line
+	9975 6300 9975 6500
+Wire Wire Line
+	10075 6300 10075 6500
+Text Label 9375 6500 1    50   ~ 0
+D0
+Text Label 9475 6500 1    50   ~ 0
+D1
+Text Label 9575 6500 1    50   ~ 0
+D2
+Text Label 9675 6500 1    50   ~ 0
+D3
+Text Label 9775 6500 1    50   ~ 0
+D4
+Text Label 9875 6500 1    50   ~ 0
+D5
+Text Label 9975 6500 1    50   ~ 0
+D6
+Text Label 10075 6500 1    50   ~ 0
+D7
+Wire Wire Line
+	9325 5250 9325 5175
+Wire Wire Line
+	9325 5175 9025 5175
+Text Label 9025 5175 0    50   ~ 0
+~D16EN
+$Comp
+L power:GND #PWR0178
+U 1 1 5EBA374B
+P 9825 5150
+F 0 "#PWR0178" H 9825 4900 50  0001 C CNN
+F 1 "GND" H 9825 5000 50  0000 C CNN
+F 2 "" H 9825 5150 50  0001 C CNN
+F 3 "" H 9825 5150 50  0001 C CNN
+	1    9825 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9525 5250 9525 5175
+Wire Wire Line
+	9525 5175 9750 5175
+Text Label 9750 5175 2    50   ~ 0
+DCLK
+Wire Wire Line
+	9825 5150 9825 5075
+Wire Wire Line
+	9825 5075 9425 5075
+Wire Wire Line
+	9425 5075 9425 5250
+$Comp
+L power:GND #PWR0179
+U 1 1 5EBA375B
+P 2250 5150
+F 0 "#PWR0179" H 2250 4900 50  0001 C CNN
+F 1 "GND" H 2250 5000 50  0000 C CNN
+F 2 "" H 2250 5150 50  0001 C CNN
+F 3 "" H 2250 5150 50  0001 C CNN
+	1    2250 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 5150 2250 5075
+Wire Wire Line
+	2250 5075 1850 5075
+Wire Wire Line
+	1850 5075 1850 5250
+$Comp
+L Display_IntelligentAlpha:PDSP1881 D16
+U 1 1 5EBA3768
+P 9375 5800
+F 0 "D16" H 9975 6300 50  0000 L CNN
+F 1 "PDSP1881" H 10175 6300 50  0000 L CNN
+F 2 "Display_IntelligentAlpha:PDSP188x" H 8775 6400 50  0001 C CNN
+F 3 "https://www.mouser.com/datasheet/2/311/00036139_0-280291.pdf" H 8525 6400 50  0001 C CNN
+	1    9375 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx_IEEE:74LS138 DU1
+U 1 1 5ED4F155
+P 1325 7025
+F 0 "DU1" H 1125 7375 50  0000 C CNN
+F 1 "74AHC138" H 1500 7375 50  0000 C CNN
+F 2 "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" H 1325 7025 50  0001 C CNN
+F 3 "" H 1325 7025 50  0001 C CNN
+	1    1325 7025
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	775  7275 675  7275
+Wire Wire Line
+	775  7375 675  7375
+Wire Wire Line
+	775  7475 675  7475
+Wire Wire Line
+	1875 6825 2125 6825
+Wire Wire Line
+	1875 6925 2125 6925
+Wire Wire Line
+	1875 7025 2125 7025
+Wire Wire Line
+	1875 7125 2125 7125
+Wire Wire Line
+	1875 7225 2125 7225
+Wire Wire Line
+	1875 7325 2125 7325
+Wire Wire Line
+	1875 7425 2125 7425
+Wire Wire Line
+	1875 7525 2125 7525
+Text Label 2125 6825 2    50   ~ 0
+~D1EN
+Text Label 2125 6925 2    50   ~ 0
+~D2EN
+Text Label 2125 7025 2    50   ~ 0
+~D3EN
+Text Label 2125 7125 2    50   ~ 0
+~D4EN
+Text Label 2125 7225 2    50   ~ 0
+~D5EN
+Text Label 2125 7325 2    50   ~ 0
+~D6EN
+Text Label 2125 7425 2    50   ~ 0
+~D7EN
+Text Label 2125 7525 2    50   ~ 0
+~D8EN
+Text Label 675  7275 0    50   ~ 0
+S0
+Text Label 675  7375 0    50   ~ 0
+S1
+Text Label 675  7475 0    50   ~ 0
+S2
+$Comp
+L 74xx_IEEE:74LS138 DU2
+U 1 1 5F0DCF61
+P 3075 7025
+F 0 "DU2" H 2875 7375 50  0000 C CNN
+F 1 "74AHC138" H 3250 7375 50  0000 C CNN
+F 2 "Package_SO:TSSOP-16_4.4x5mm_P0.65mm" H 3075 7025 50  0001 C CNN
+F 3 "" H 3075 7025 50  0001 C CNN
+	1    3075 7025
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2525 7275 2400 7275
+Wire Wire Line
+	2525 7375 2400 7375
+Wire Wire Line
+	2525 7475 2400 7475
+Wire Wire Line
+	3625 6825 3875 6825
+Wire Wire Line
+	3625 6925 3875 6925
+Wire Wire Line
+	3625 7025 3875 7025
+Wire Wire Line
+	3625 7125 3875 7125
+Wire Wire Line
+	3625 7225 3875 7225
+Wire Wire Line
+	3625 7325 3875 7325
+Wire Wire Line
+	3625 7425 3875 7425
+Wire Wire Line
+	3625 7525 3875 7525
+Text Label 3875 6825 2    50   ~ 0
+~D9EN
+Text Label 3875 6925 2    50   ~ 0
+~D10EN
+Text Label 3875 7025 2    50   ~ 0
+~D11EN
+Text Label 3875 7125 2    50   ~ 0
+~D12EN
+Text Label 3875 7225 2    50   ~ 0
+~D13EN
+Text Label 3875 7325 2    50   ~ 0
+~D14EN
+Text Label 3875 7425 2    50   ~ 0
+~D15EN
+Text Label 3875 7525 2    50   ~ 0
+~D16EN
+Text Label 2400 7275 0    50   ~ 0
+S0
+Text Label 2400 7375 0    50   ~ 0
+S1
+Text Label 2400 7475 0    50   ~ 0
+S2
+Wire Wire Line
+	775  6825 500  6825
+Wire Wire Line
+	2525 6825 2250 6825
+Wire Wire Line
+	2525 7025 2400 7025
+Wire Wire Line
+	775  6925 675  6925
+Wire Wire Line
+	2525 6925 2325 6925
+Text Label 2400 7025 0    50   ~ 0
+S3
+Text Label 675  6925 0    50   ~ 0
+S3
+Text HLabel 6775 7475 3    50   Input ~ 0
+D0
+Text HLabel 6675 7475 3    50   Input ~ 0
+D1
+Text HLabel 6575 7475 3    50   Input ~ 0
+D2
+Text HLabel 6475 7475 3    50   Input ~ 0
+D3
+Text HLabel 6375 7475 3    50   Input ~ 0
+D4
+Text HLabel 6275 7475 3    50   Input ~ 0
+D5
+Text HLabel 6175 7475 3    50   Input ~ 0
+D6
+Wire Wire Line
+	1650 700  1150 700 
+Text Label 1150 700  0    50   ~ 0
+~DRST
+Wire Wire Line
+	1650 2225 1175 2225
+Text Label 1175 2225 0    50   ~ 0
+~DRST
+Wire Wire Line
+	1150 350  1625 350 
+Text Label 1150 350  0    50   ~ 0
+~DRST
+Wire Wire Line
+	3700 700  4175 700 
+Text Label 3700 700  0    50   ~ 0
+~DRST
+Wire Wire Line
+	3700 2225 4175 2225
+Text Label 3700 2225 0    50   ~ 0
+~DRST
+Wire Wire Line
+	3700 3725 4175 3725
+Text Label 3700 3725 0    50   ~ 0
+~DRST
+Wire Wire Line
+	1175 3725 1650 3725
+Text Label 1175 3725 0    50   ~ 0
+~DRST
+Wire Wire Line
+	1175 5250 1650 5250
+Text Label 1175 5250 0    50   ~ 0
+~DRST
+Wire Wire Line
+	3700 5250 4175 5250
+Text Label 3700 5250 0    50   ~ 0
+~DRST
+Wire Wire Line
+	6225 700  6700 700 
+Text Label 6225 700  0    50   ~ 0
+~DRST
+Wire Wire Line
+	6225 2225 6700 2225
+Text Label 6225 2225 0    50   ~ 0
+~DRST
+Wire Wire Line
+	6225 3725 6700 3725
+Text Label 6225 3725 0    50   ~ 0
+~DRST
+Wire Wire Line
+	6225 5250 6700 5250
+Text Label 6225 5250 0    50   ~ 0
+~DRST
+Wire Wire Line
+	8750 700  9225 700 
+Text Label 8750 700  0    50   ~ 0
+~DRST
+Wire Wire Line
+	8750 2225 9225 2225
+Text Label 8750 2225 0    50   ~ 0
+~DRST
+Wire Wire Line
+	8750 3725 9225 3725
+Text Label 8750 3725 0    50   ~ 0
+~DRST
+Wire Wire Line
+	8750 5250 9225 5250
+Text Label 8750 5250 0    50   ~ 0
+~DRST
+Text HLabel 6075 7475 3    50   Input ~ 0
+D7
+$Comp
+L power:GND #PWR0180
+U 1 1 5ECAD1C3
+P 6875 7475
+F 0 "#PWR0180" H 6875 7225 50  0001 C CNN
+F 1 "GND" H 6875 7325 50  0000 C CNN
+F 2 "" H 6875 7475 50  0001 C CNN
+F 3 "" H 6875 7475 50  0001 C CNN
+	1    6875 7475
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small DC1
+U 1 1 5F5EB511
+P 5200 6825
+F 0 "DC1" H 5292 6871 50  0000 L CNN
+F 1 "0.1uF" H 5292 6780 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 5200 6825 50  0001 C CNN
+F 3 "~" H 5200 6825 50  0001 C CNN
+	1    5200 6825
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0126
+U 1 1 5F5ED691
+P 5200 6925
+F 0 "#PWR0126" H 5200 6675 50  0001 C CNN
+F 1 "GND" H 5200 6775 50  0000 C CNN
+F 2 "" H 5200 6925 50  0001 C CNN
+F 3 "" H 5200 6925 50  0001 C CNN
+	1    5200 6925
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0127
+U 1 1 5F5EDB4B
+P 5200 6725
+F 0 "#PWR0127" H 5200 6575 50  0001 C CNN
+F 1 "VCC" H 5200 6875 50  0000 C CNN
+F 2 "" H 5200 6725 50  0001 C CNN
+F 3 "" H 5200 6725 50  0001 C CNN
+	1    5200 6725
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small DC2
+U 1 1 5F634C60
+P 5575 6825
+F 0 "DC2" H 5667 6871 50  0000 L CNN
+F 1 "0.1uF" H 5667 6780 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 5575 6825 50  0001 C CNN
+F 3 "~" H 5575 6825 50  0001 C CNN
+	1    5575 6825
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0182
+U 1 1 5F634C6A
+P 5575 6925
+F 0 "#PWR0182" H 5575 6675 50  0001 C CNN
+F 1 "GND" H 5575 6775 50  0000 C CNN
+F 2 "" H 5575 6925 50  0001 C CNN
+F 3 "" H 5575 6925 50  0001 C CNN
+	1    5575 6925
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0183
+U 1 1 5F634C74
+P 5575 6725
+F 0 "#PWR0183" H 5575 6575 50  0001 C CNN
+F 1 "VCC" H 5575 6875 50  0000 C CNN
+F 2 "" H 5575 6725 50  0001 C CNN
+F 3 "" H 5575 6725 50  0001 C CNN
+	1    5575 6725
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small DC3
+U 1 1 5F73B826
+P 6375 6875
+F 0 "DC3" H 6467 6921 50  0000 L CNN
+F 1 "0.1uF" H 6467 6830 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 6375 6875 50  0001 C CNN
+F 3 "~" H 6375 6875 50  0001 C CNN
+	1    6375 6875
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0186
+U 1 1 5F73BDBE
+P 6375 6975
+F 0 "#PWR0186" H 6375 6725 50  0001 C CNN
+F 1 "GND" H 6375 6825 50  0000 C CNN
+F 2 "" H 6375 6975 50  0001 C CNN
+F 3 "" H 6375 6975 50  0001 C CNN
+	1    6375 6975
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R DR1
+U 1 1 5F73F1EB
+P 6100 6775
+F 0 "DR1" V 6175 6775 50  0000 C CNN
+F 1 "10k" V 6100 6775 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6030 6775 50  0001 C CNN
+F 3 "~" H 6100 6775 50  0001 C CNN
+	1    6100 6775
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6250 6775 6375 6775
+Wire Wire Line
+	6375 6775 6900 6775
+Connection ~ 6375 6775
+$Comp
+L power:VCC #PWR0187
+U 1 1 5F8677FD
+P 5950 6775
+F 0 "#PWR0187" H 5950 6625 50  0001 C CNN
+F 1 "VCC" H 5950 6925 50  0000 C CNN
+F 2 "" H 5950 6775 50  0001 C CNN
+F 3 "" H 5950 6775 50  0001 C CNN
+	1    5950 6775
+	1    0    0    -1  
+$EndComp
+Text Label 6900 6775 2    50   ~ 0
+~DRST
+Text HLabel 5775 7475 3    50   Input ~ 0
+A2
+Text HLabel 5875 7475 3    50   Input ~ 0
+A3
+Text HLabel 5675 7475 3    50   Input ~ 0
+A1
+Text HLabel 5575 7475 3    50   Input ~ 0
+A0
+Text HLabel 5275 7475 3    50   Input ~ 0
+~WR
+Text HLabel 5175 7475 3    50   Input ~ 0
+~RD
+Text HLabel 5075 7475 3    50   Input ~ 0
+S3
+Text HLabel 4975 7475 3    50   Input ~ 0
+S2
+Text HLabel 4875 7475 3    50   Input ~ 0
+S1
+Text HLabel 5975 7475 3    50   Input ~ 0
+A4
+$Comp
+L power:VCC #PWR0181
+U 1 1 5ECAEEFD
+P 5375 7475
+F 0 "#PWR0181" H 5375 7325 50  0001 C CNN
+F 1 "VCC" H 5375 7625 50  0000 C CNN
+F 2 "" H 5375 7475 50  0001 C CNN
+F 3 "" H 5375 7475 50  0001 C CNN
+	1    5375 7475
+	-1   0    0    1   
+$EndComp
+Text HLabel 5475 7475 3    50   Input ~ 0
+~FL
+Text HLabel 4775 7475 3    50   Input ~ 0
+S0
+$Comp
+L power:VCC #PWR0188
+U 1 1 5EFF3187
+P 575 7125
+F 0 "#PWR0188" H 575 6975 50  0001 C CNN
+F 1 "VCC" H 575 7275 50  0000 C CNN
+F 2 "" H 575 7125 50  0001 C CNN
+F 3 "" H 575 7125 50  0001 C CNN
+	1    575  7125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	575  7125 775  7125
+Wire Wire Line
+	775  7125 775  7025
+$Comp
+L power:GND #PWR0201
+U 1 1 5F03163A
+P 2325 7000
+F 0 "#PWR0201" H 2325 6750 50  0001 C CNN
+F 1 "GND" H 2325 6850 50  0000 C CNN
+F 2 "" H 2325 7000 50  0001 C CNN
+F 3 "" H 2325 7000 50  0001 C CNN
+	1    2325 7000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2325 6925 2325 7000
+Text Label 2250 6825 0    50   ~ 0
+~DISPEN
+Text Label 500  6825 0    50   ~ 0
+~DISPEN
+$Comp
+L Connector_Generic:Conn_01x26 DJ1
+U 1 1 5EE5A785
+P 5575 7275
+F 0 "DJ1" V 5675 6725 50  0000 C CNN
+F 1 "Conn_01x26" V 5675 6125 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x26_P2.54mm_Vertical" H 5575 7275 50  0001 C CNN
+F 3 "~" H 5575 7275 50  0001 C CNN
+	1    5575 7275
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Jumper:SolderJumper_2_Open DJP1
+U 1 1 5F732D79
+P 4375 7625
+F 0 "DJP1" H 3775 7625 50  0000 L CNN
+F 1 "SolderJumper_2_Open" V 4420 7693 50  0001 L CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" H 4375 7625 50  0001 C CNN
+F 3 "~" H 4375 7625 50  0001 C CNN
+	1    4375 7625
+	0    1    1    0   
+$EndComp
+$Comp
+L Jumper:SolderJumper_2_Open DJP2
+U 1 1 5F7E9A1F
+P 4475 7625
+F 0 "DJP2" H 3875 7625 50  0000 L CNN
+F 1 "SolderJumper_2_Open" V 4520 7693 50  0001 L CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" H 4475 7625 50  0001 C CNN
+F 3 "~" H 4475 7625 50  0001 C CNN
+	1    4475 7625
+	0    1    1    0   
+$EndComp
+$Comp
+L Jumper:SolderJumper_2_Open DJP4
+U 1 1 5F7F002B
+P 4675 7625
+F 0 "DJP4" H 4075 7625 50  0000 L CNN
+F 1 "SolderJumper_2_Open" V 4720 7693 50  0001 L CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" H 4675 7625 50  0001 C CNN
+F 3 "~" H 4675 7625 50  0001 C CNN
+	1    4675 7625
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4675 7775 4575 7775
+Wire Wire Line
+	4575 7775 4475 7775
+Connection ~ 4575 7775
+Wire Wire Line
+	4375 7775 4475 7775
+Connection ~ 4475 7775
+$Comp
+L Jumper:SolderJumper_2_Open DJP3
+U 1 1 5F7ECDB0
+P 4575 7625
+F 0 "DJP3" H 3975 7625 50  0000 L CNN
+F 1 "SolderJumper_2_Open" V 4620 7693 50  0001 L CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" H 4575 7625 50  0001 C CNN
+F 3 "~" H 4575 7625 50  0001 C CNN
+	1    4575 7625
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4375 7775 4050 7775
+Connection ~ 4375 7775
+Text Label 4050 7775 0    50   ~ 0
+~DISPEN
+$EndSCHEMATC
